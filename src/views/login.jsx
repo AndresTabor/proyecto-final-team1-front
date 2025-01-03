@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
     const [user, setUser] = useState({
         email: "",
-        contraseña: "",
+        password: "",
     })
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user);
+        //url del codeSpace
+        const url = "http://localhost:3000"
+        const response = await fetch(`${url}/user/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
+
+        const data = await response.json();
+        console.log(data);
+        
         
         navigate("/register");
 
@@ -34,8 +46,8 @@ export const Login = () => {
                     <label>CONTRASEÑA</label>
                     <input
                         type="password"
-                        value={user.contraseña}
-                        onChange={(e) => setUser({ ...user, contraseña: e.target.value })}
+                        value={user.password}
+                        onChange={(e) => setUser({ ...user, password: e.target.value })}
                         required
                     />
                 </div>
