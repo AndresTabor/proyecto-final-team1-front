@@ -1,4 +1,5 @@
 import './App.css'
+import injectContext from './store/appContext'
 
 function App() {
   
@@ -10,4 +11,5 @@ function App() {
   )
 }
 
-export default App
+const WrappedApp = injectContext(App);
+export default WrappedApp;
