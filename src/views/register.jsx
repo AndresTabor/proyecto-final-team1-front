@@ -11,7 +11,19 @@ export const Register = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user);
+        const url = "http://localhost:3000"
+        const response = await fetch(`${url}/user/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        });
+
+        const data = await response.json();
+
+
+        console.log(data);
     
         navigate("/login");
 
