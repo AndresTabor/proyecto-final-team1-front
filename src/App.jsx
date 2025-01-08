@@ -3,6 +3,7 @@ import React from "react";
 import { Login } from "./views/login";
 import { Register } from "./views/register";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import injectContext from './store/AppContext'
 
 function App() {
 
@@ -20,4 +21,5 @@ function App() {
   )
 }
 
-export default App
+const WrappedApp = injectContext(App);
+export default WrappedApp;
