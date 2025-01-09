@@ -4,6 +4,7 @@ import  Logo  from "../assets/images/imagenlogo.webp"
 
 export const Login = () => {
 
+    // const {actions} = useContext(Context);
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -12,8 +13,8 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         //url del codeSpace
-        const url = "http://localhost:3000"
-        const response = await fetch(`${url}/user/login`, {
+        const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
+        const response = await fetch(`${url}/users/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +25,7 @@ export const Login = () => {
         const data = await response.json();
         console.log(data);
         
-        
+        await actions.login(user);
         navigate("/register");
 
     };
@@ -33,7 +34,7 @@ export const Login = () => {
     return (
         <div className="container mt-5 w-50 p-5">
             <div className="d-flex justify-content-center form-control-lg">
-                <img className= "rounded" src={Logo} alt="Logo"/>
+                <img className= "rounded-circle mb-5" src={Logo} alt="Logo"/>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-5">
@@ -65,9 +66,11 @@ export const Login = () => {
                 <button type='submit' className="btn btn-outline-primary">INGRESAR</button>
                 </div>
                 <div className="text-end mt-5">
-                <p>No tienes cuenta? Regístrate</p>
+                <p className="text-center">No tienes cuenta? Regístrate</p>
                 </div>
+                <div className="text-center">
                 <Link to = "/register">REGISTRARSE</Link>
+                </div>
             </form>
         </div>
 
