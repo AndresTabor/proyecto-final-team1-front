@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/images/imagenlogo.webp"
+import { Context } from "../store/AppContext";
 
 export const Register = () => {
+
+    const {actions} = useContext(Context);
 
     const [user, setUser] = useState({
         fullname: "",
@@ -12,21 +15,10 @@ export const Register = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
-        const response = await fetch(`${url}/users/register`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        });
-
-        const data = await response.json();
-
-
-        console.log(data);
-
-        navigate("/login");
+        console.log(user);
+        
+        await actions.register(user)
+        // navigate("/login");
 
     };
 
@@ -72,7 +64,7 @@ export const Register = () => {
                         required
                     />
                 </div>
-                <div class="d-grid gap-2 col-3 mx-auto">
+                <div className="d-grid gap-2 col-3 mx-auto">
                     <button type='submit' className="btn btn-outline-primary mt-5">REGISTRARSE</button>
                 </div>
                 <div className="text-center mt-5">

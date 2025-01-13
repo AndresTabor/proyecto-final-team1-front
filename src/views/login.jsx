@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import  Logo  from "../assets/images/imagenlogo.webp"
+import { Context } from "../store/AppContext";
 
 export const Login = () => {
 
-    // const {actions} = useContext(Context);
+    const {actions} = useContext(Context);
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -13,20 +14,9 @@ export const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         //url del codeSpace
-        const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
-        const response = await fetch(`${url}/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        });
-
-        const data = await response.json();
-        console.log(data);
-        
-        await actions.login(user);
-        navigate("/register");
+       
+        await actions.Login(user)
+        // navigate("/register");
 
     };
 

@@ -3,14 +3,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: [],
-			email: [],
-			login: [],
-			id: []
-			
+
 		},
 		actions: {
 
-			login: async (user) => {
+			login: async (newUser) => {
 				const store = getStore();
 				try {
 					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
@@ -19,39 +16,61 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify(user),
+						body: JSON.stringify(newUser),
 					});
 					if (!resp.ok) {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
 					const user = await resp.json();
 					console.log(user);
-					
+
 				} catch (error) {
 					console.error("Error loading user", error);
 
 				}
 			},
-			addRegister: async (user) => {
-				const store = getStore();
+			register: async (newUser) => {
+				console.log(newUser);
+				
+				// const store = getStore();
 				try {
-					const resp = await fetch(`https:`, {
+					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
+					const resp = await fetch(`${url}/users/register`, {
 						method: "POST",
-						body: JSON.stringify(user),
+						body: JSON.stringify(newUser),
 						headers: { 'Content-Type': 'application/json' }
 
 					});
 					if (!resp.ok) {
-						throw new Error('Http error! status: ${resp.status}');
+						throw new Error(`Http error! status: ${resp.status}`);
 					}
-					await getActions().getUser();
+					// await getActions();
+					const data = await resp.json();
+					console.log (data);
+					
 				} catch (error) {
-					console.error("Error adding contacts", error);
+					console.error("Error register", error);
 
 				}
 			},
+			logout: async () => {
+				const store = getStore();
+				try {
+					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
+					const resp = await fetch(`${url}/users/logout`, {
+						method: "DELETE"
+					});
+					if (!resp.ok) {
+						throw new Error(`Http error! status: ${resp.status}`);
+					}
+				} catch (error) {
+					console.error("Error logout", error);
+				}
+			}
 		}
 	};
-};
+}
+	
+
 
 export default getState;
