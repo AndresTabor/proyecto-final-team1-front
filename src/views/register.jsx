@@ -10,7 +10,7 @@ export const Register = () => {
     const [user, setUser] = useState({
         fullname: "",
         email: "",
-        contraseña: "",
+        password: "",
     })
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
@@ -30,7 +30,6 @@ export const Register = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    {/* <label>FULLNAME</label> */}
                     <input
                         className="form-control"
                         placeholder="Nombre" aria-label="Recipient's username" aria-describedby="basic-addon2"
@@ -42,7 +41,6 @@ export const Register = () => {
                 </div>
 
                 <div>
-                    {/* <label>EMAIL</label> */}
                     <input
                         className="form-control mt-5 w-100"
                         placeholder="Email" aria-label="Recipient's username" aria-describedby="basic-addon2"
@@ -54,13 +52,12 @@ export const Register = () => {
                 </div>
 
                 <div>
-                    {/* <label>CONTRASEÑA</label> */}
                     <input
                         className="form-control mt-5 w-100"
                         placeholder="Contraseña" aria-label="Recipient's username" aria-describedby="basic-addon2"
                         type="password"
-                        value={user.contraseña}
-                        onChange={(e) => setUser({ ...user, contraseña: e.target.value })}
+                        value={user.password}
+                        onChange={(e) => setUser({ ...user, password: e.target.value })}
                         required
                     />
                 </div>

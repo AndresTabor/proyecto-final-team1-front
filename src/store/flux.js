@@ -3,14 +3,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			user: [],
-
+			token: null
 		},
 		actions: {
 
 			login: async (newUser) => {
 				const store = getStore();
 				try {
-					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
+					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
 					const resp = await fetch(`${url}/users/login`, {
 						method: "POST",
 						headers: {
@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
 					const user = await resp.json();
+					setStore ({token: user.access_token, user: newUser})
 					console.log(user);
 
 				} catch (error) {
@@ -34,13 +35,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				// const store = getStore();
 				try {
-					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
+					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
 					const resp = await fetch(`${url}/users/register`, {
 						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
 						body: JSON.stringify(newUser),
-						headers: { 'Content-Type': 'application/json' }
-
 					});
+					
 					if (!resp.ok) {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
@@ -54,18 +57,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logout: async () => {
-				const store = getStore();
-				try {
-					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/"
-					const resp = await fetch(`${url}/users/logout`, {
-						method: "DELETE"
-					});
-					if (!resp.ok) {
-						throw new Error(`Http error! status: ${resp.status}`);
-					}
-				} catch (error) {
-					console.error("Error logout", error);
-				}
+				setStore({token: null, user: null})
+				// const store = getStore();
+				// try {
+				// 	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
+				// 	const resp = await fetch(`${url}/users/logout`, {
+				// 		// method: "DELETE"
+				// 	});
+				// 	if (!resp.ok) {
+				// 		throw new Error(`Http error! status: ${resp.status}`);
+				// 	}
+				// } catch (error) {
+				// 	console.error("Error logout", error);
+				// }
 			}
 		}
 	};
