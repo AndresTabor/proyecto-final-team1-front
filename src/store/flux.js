@@ -57,19 +57,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logout: async () => {
-				setStore({token: null, user: null})
-				// const store = getStore();
-				// try {
-				// 	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
-				// 	const resp = await fetch(`${url}/users/logout`, {
-				// 		// method: "DELETE"
-				// 	});
-				// 	if (!resp.ok) {
-				// 		throw new Error(`Http error! status: ${resp.status}`);
-				// 	}
-				// } catch (error) {
-				// 	console.error("Error logout", error);
-				// }
+				
+				const store = getStore();
+				try {
+					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
+					const resp = await fetch(`${url}/users/logout`, {
+						method: "DELETE",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						}
+					});
+					if (!resp.ok) {
+						throw new Error(`Http error! status: ${resp.status}`);
+					}
+					setStore({token: null, user: []})
+				} catch (error) {
+					console.error("Error logout", error);
+				}
 			}
 		}
 	};
