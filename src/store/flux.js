@@ -1,9 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 
+	const POST_URL = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev/post/"
+
 	return {
 		store: {
 			user: [],
-			token: null
+			token: null,
+			posts: [] 
 		},
 		actions: {
 
@@ -74,7 +77,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("Error logout", error);
 				}
-			}
+			},
+
+			fetchPosts: async () => {
+                try {
+                    const response = await fetch(POST_URL);
+                    if (!response.ok) {
+                        throw new Error('Error al obtener las publicaciones');
+                    }
+                    const data = await response.json();
+                    if (data.status === 'success') {
+                        setStore({ posts: data.data }); // se guardan las publicaciones en el store
+                    } else {
+                        console.error('Error: ', data);
+                    }
+                } catch (error) {
+                    console.error('Error al hacer la petición:', error);
+                }
+            },
 		}
 	};
 }

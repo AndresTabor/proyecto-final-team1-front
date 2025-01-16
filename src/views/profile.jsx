@@ -14,7 +14,7 @@ export const Profile = () => {
         <div className="card mb-5 mt-5 w-50 p-5">
             <div className="row g-0">
                 <div className="col-md-4 mt-5">
-                    <img className= "rounded-circle" src="https://cdn-icons-png.flaticon.com/512/4794/4794936.png" className="img-fluid rounded-start" alt="Foto"/>
+                    <img src="https://cdn-icons-png.flaticon.com/512/4794/4794936.png" className="rounded-circle img-fluid rounded-start" alt="Foto"/>
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
