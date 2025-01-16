@@ -18,7 +18,7 @@ export const Register = () => {
         console.log(user);
         
         await actions.register(user)
-        // navigate("/login");
+        navigate("/login");
 
     };
 

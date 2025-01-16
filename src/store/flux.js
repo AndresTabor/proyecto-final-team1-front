@@ -1,8 +1,10 @@
+import { jwtDecode } from "jwt-decode";
+
 const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
 		store: {
-			user: [],
+			user: {},
 			token: null
 		},
 		actions: {
@@ -21,15 +23,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!resp.ok) {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
-					const user = await resp.json();
-					setStore ({token: user.access_token, user: newUser})
-					console.log(user);
+					const data = await resp.json();
+					setStore ({token: data.access_token})
+					localStorage.setItem('token', data.access_token);
+					const payload = jwtDecode(data.access_token);
+					const user = payload.user;
+					setStore ({user: user})
+				
+					localStorage.setItem('user', JSON.stringify(user));        
+					console.log(user, payload);
 
 				} catch (error) {
 					console.error("Error loading user", error);
 
 				}
 			},
+
+			
 			register: async (newUser) => {
 				console.log(newUser);
 				

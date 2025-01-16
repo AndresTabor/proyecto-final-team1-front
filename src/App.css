@@ -7,8 +7,25 @@ img {
 }
 
 .card {
-    background-color:#E8F9FF;
-    
-    
+    background-color:#E8F9FF; 
     
 }
+
+input {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5%;
+    
+  }
+  
+  .cuadro {
+    /* display: grid; */
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+
+  .card-title {
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    padding: 10px;
+  }

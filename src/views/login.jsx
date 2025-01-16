@@ -16,7 +16,7 @@ export const Login = () => {
         //url del codeSpace
        
         await actions.login(user)
-        // navigate("/register");
+        navigate("/profile");
 
     };
 
