@@ -1,3 +1,11 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import { Inicio } from './navegacion/Inicio';
+import { Favoritos } from './navegacion/Favoritos';
+import { Buscador } from './navegacion/Buscador';
+import { Chats } from './navegacion/Chats';
+import { Perfil } from './navegacion/Perfil';
+
 import './App.css'
 import React from "react";
 import { Login } from "./views/login";
@@ -11,6 +19,7 @@ import PostSingleView from "./views/PostSingleView";
 
 
 
+import {NavBar} from "./components/navbar/NavBar"
 function App() {
 
   
@@ -24,6 +33,11 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/posts-list" element={<PostsView />} />
           <Route path="/posts-list/:id" element={<PostSingleView />} />
+          <Route path='/' element = {<Inicio/>} />
+          <Route path='/favoritos' element = {<Favoritos/>} />
+          <Route path='/buscador' element = {<Buscador/>} />
+          <Route path='/chats' element = {<Chats/>} />
+          <Route path='/perfil' element = {<Perfil/>} />
         </Routes>
       </BrowserRouter>
     </>
