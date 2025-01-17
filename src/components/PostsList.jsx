@@ -13,7 +13,7 @@ const PostsList = () => {
         <div className="container mt-5">
             <h1 className="mb-4">Publicaciones</h1>
             <div className="row">
-                {store.posts.length > 0 ? (
+                {store.posts && store.posts.length > 0 ? (
                     store.posts.map((post) => (
                         <div className="col-12" key={post.id}>
                             <PostCard post={post} /> 
