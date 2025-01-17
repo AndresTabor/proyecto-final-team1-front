@@ -40,7 +40,7 @@ export const NavBar = () => {
                             <FaRegMessage className="icons"/>
                             <h3>Chats</h3>
                         </Link>
-                        <Link to = "/perfil" className="perfil d-flex align-item-center gap-2">
+                        <Link to = "/profile" className="perfil d-flex align-item-center gap-2">
                             <CgProfile className="icons"/>
                             <h3>Perfil</h3>
                         </Link>

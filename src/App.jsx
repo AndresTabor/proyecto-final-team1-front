@@ -1,11 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import { Inicio } from './navegacion/Inicio';
 import { Favoritos } from './navegacion/Favoritos';
 import { Buscador } from './navegacion/Buscador';
 import { Chats } from './navegacion/Chats';
 import { Perfil } from './navegacion/Perfil';
-
 import './App.css'
 import React from "react";
 import { Login } from "./views/login";
@@ -16,17 +14,16 @@ import { Profile } from './views/profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PostsView from './views/PostsView';
 import PostSingleView from "./views/PostSingleView";
+import { NavBar } from "./components/navbar/NavBar"
 
 
 
-import {NavBar} from "./components/navbar/NavBar"
+
 function App() {
-
-  
-
   return (
     <>
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
