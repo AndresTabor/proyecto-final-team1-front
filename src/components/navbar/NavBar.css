@@ -1,0 +1,20 @@
+img{
+    width:220px;
+}
+
+.icons{
+    color:#EB9E15;
+    font-size:2em;
+}
+
+/* Quita los estilos predeterminados de los Links */
+.navbar a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: black; /* Hereda el color del contenedor */
+}
+
+.navbar a:hover {
+    color: #f8a10b; /* Cambia el color al pasar el cursor */
+}
+
+
