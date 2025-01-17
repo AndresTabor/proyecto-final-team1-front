@@ -1,6 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
 
-	const POST_URL = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev/post/"
+	const POST_URL = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev/posts/"
 
 	return {
 		store: {
