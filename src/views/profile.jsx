@@ -57,12 +57,12 @@ export const Profile = () => {
                                 <div className="cuadro">
                                    
                                     <p className="card-title">Nombre: {store.user.fullname}</p>
-                                    <p className="card-title">Email: {user.email}</p>
+                                    <p className="card-title">Email: {store.user.email}</p>
                                     <p className="card-title">Localización: </p>
-                                    <p className="card-title">Fecha registro: </p>
+                                    <p className="card-title">Fecha registro: {store.user.date_at} </p>
 
                                     <div className="text-end mt-5">
-                                        <button type="submit" className="btn btn-outline-primary ml-5 "><i class="fa-solid fa-heart-circle-check"></i></button>
+                                        <button type="submit" className="btn btn-outline-primary ml-5 "><i className="fa-solid fa-heart-circle-check"></i></button>
                                         <button onClick={handleEdit} type='submit' className="btn btn-outline-primary">EDITAR</button>
                                     </div>
 
