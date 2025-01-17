@@ -2,19 +2,22 @@ import { jwtDecode } from "jwt-decode";
 
 const getState = ({ getStore, getActions, setStore }) => {
 
+
+	const url = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev"
 	const POST_URL = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev/posts/"
 
 	return {
 		store: {
 			user: [],
-			token: null
+			token: null,
+			posts: [],
+			singlePost: null
 		},
 		actions: {
 
 			login: async (newUser) => {
 				const store = getStore();
 				try {
-					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
 					const resp = await fetch(`${url}/users/login`, {
 						method: "POST",
 						headers: {
@@ -47,7 +50,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				// const store = getStore();
 				try {
-					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
 					const resp = await fetch(`${url}/users/register`, {
 						method: "POST",
 						headers: {
@@ -72,7 +74,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				const store = getStore();
 				try {
-					const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
 					const resp = await fetch(`${url}/users/logout`, {
 						method: "DELETE",
 						headers: {
