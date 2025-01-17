@@ -6,6 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
+import { IoMdLogIn } from "react-icons/io";
 
 export const NavBar = () => {
     return (
@@ -32,10 +33,6 @@ export const NavBar = () => {
                             <FaHeart className="icons"/>
                             <h3>Favoritos</h3>
                         </Link>
-                        <Link to = "/buscador" className="buscador d-flex align-item-center gap-2">
-                            <FaSearch className="icons"/>
-                            <h3>Buscador</h3>
-                        </Link>
                         <Link to = "/chats" className="chats d-flex align-item-center gap-2">
                             <FaRegMessage className="icons"/>
                             <h3>Chats</h3>
@@ -43,6 +40,10 @@ export const NavBar = () => {
                         <Link to = "/profile" className="perfil d-flex align-item-center gap-2">
                             <CgProfile className="icons"/>
                             <h3>Perfil</h3>
+                        </Link>
+                        <Link to = "/login" className="perfil d-flex align-item-center gap-2">
+                            <IoMdLogIn className="icons"/>
+                            <h3>Ingresar</h3>
                         </Link>
                     </ul>
                     
