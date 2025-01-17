@@ -20,7 +20,7 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			
+			state.actions.isLogin();
 		}, []);
 
 		

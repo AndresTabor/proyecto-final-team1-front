@@ -16,21 +16,23 @@ import './App.css'
 
 
 function App() {
+
+  
   return (
-    <>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path='/' element = {<Inicio/>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/posts-list/:id" element={<PostSingleView />} />
-          <Route path='/favoritos' element = {<Favoritos/>} />
-          <Route path='/chats' element = {<Chats/>} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path='/' element = {<Inicio/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/posts-list/:id" element={<PostSingleView />} />
+        <Route path='/favoritos' element = {<Favoritos/>} />
+        <Route path='/chats' element = {<Chats/>} />
+      </Routes>
+    </BrowserRouter>
+    
   )
 }
 

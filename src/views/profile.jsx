@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../store/AppContext";
 
 
@@ -6,13 +6,9 @@ export const Profile = () => {
     const { store, actions } = useContext(Context);
     const [isEditing, setIsEditing] = useState(false);
     const [user, setUser] = useState({
-        name: '',
+        fullname: '',
         email: '',
-        localization: '',
-        registration_date: '',
-        description: '',
-        favorites: ''
-
+        // localization: '',
     });
 
 
@@ -22,12 +18,17 @@ export const Profile = () => {
 
     const handleSave = (e) => {
         e.preventDefault();
-
+        actions.updateUser(user);
         setIsEditing(false);
     };
 
 
-
+    useEffect(() => {
+        setUser({
+            fullname: store.user.fullname,
+            email: store.user.email
+        });
+    }, [store.user]);
 
 
     return (
@@ -43,9 +44,9 @@ export const Profile = () => {
 
                             {isEditing ? (
                                 <form onSubmit={handleSave}>
-                                    <input className="form-control mb-3" placeholder="Nombre" type="text" value={user.name} onChange={(e) => setUser({ ...user, name: e.target.value })} />
+                                    <input className="form-control mb-3" placeholder="Nombre" type="text" value={user.fullname} onChange={(e) => setUser({ ...user, fullname: e.target.value })} />
                                     <input className="form-control mb-3" placeholder="Email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
-                                    <input className="form-control mb-3" placeholder="Localización" type="text" value={user.localization} onChange={(e) => setUser({ ...user, localization: e.target.value })} />
+                                    {/* <input className="form-control mb-3" placeholder="Localización" type="text" value={user.localization} onChange={(e) => setUser({ ...user, localization: e.target.value })} /> */}
 
                                     <div className="text-end mt-5">
                                         <button onClick={handleSave} type='submit' className="btn btn-outline-primary">GUARDAR</button>

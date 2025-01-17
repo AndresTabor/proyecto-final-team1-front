@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev"
+	const url = "http://localhost:3000/"
 
 	return {
 		store: {
@@ -13,7 +13,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			singlePost: null
 		},
 		actions: {
-
+			isLogin: () => {
+				const token = localStorage.getItem('token') || null;
+				const user = JSON.parse(localStorage.getItem('user') || null);
+				if (token && user) {
+                    setStore({ token: token, user: user });
+                }
+			}, 
 			login: async (newUser) => {
 				const store = getStore();
 				try {
@@ -83,6 +89,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
 					setStore({token: null, user: []})
+					localStorage.removeItem('token');
+					localStorage.removeItem('user');
+				} catch (error) {
+					console.error("Error logout", error);
+				}
+			},
+			updateUser : async(data) => {
+				
+				const store = getStore();
+				try {
+					const resp = await fetch(`${url}/users/profile`, {
+						method: "PUT",
+						headers: {
+							"Authorization": `Bearer ${store.token}`,
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(data)
+					});
+					if (!resp.ok) {
+						throw new Error(`Http error! status: ${resp.status}`);
+					}
+					const userUpdated = await resp.json();
+					setStore({user: userUpdated})
 				} catch (error) {
 					console.error("Error logout", error);
 				}
