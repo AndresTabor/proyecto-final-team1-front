@@ -6,7 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			user: [],
 			token: null,
-			posts: [] 
+			posts: [],
+			singlePost: null
 		},
 		actions: {
 
@@ -87,12 +88,25 @@ const getState = ({ getStore, getActions, setStore }) => {
                     }
                     const data = await response.json();
                     if (data.status === 'success') {
-                        setStore({ posts: data.data }); // se guardan las publicaciones en el store
+                        setStore({ posts: data.data }); // se guardan las pubs en la store
                     } else {
                         console.error('Error: ', data);
                     }
                 } catch (error) {
                     console.error('Error al hacer la petición:', error);
+                }
+            },
+
+			getSinglePost: async (id) => {
+                try {
+                    const response = await fetch(POST_URL + `${id}`);
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    setStore({ singlePost: data }); // se almacena en la store
+                } catch (error) {
+                    console.error("Error fetching single post:", error);
                 }
             },
 		}
