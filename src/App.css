@@ -1,0 +1,12 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Elimina los márgenes predeterminados */
+    font-family:"Calistoga";
+
+}
+
+h1{
+    text-align: center;
+    align-items: center;
+    margin-top: 200px;
+}
