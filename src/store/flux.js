@@ -4,7 +4,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 	const url = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev"
-	const POST_URL = "https://fictional-carnival-j4jj9j5j59xhjqg6-3000.app.github.dev/posts/"
 
 	return {
 		store: {
@@ -91,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			fetchPosts: async () => {
                 try {
-                    const response = await fetch(POST_URL);
+                    const response = await fetch(url + `/posts`);
                     if (!response.ok) {
                         throw new Error('Error al obtener las publicaciones');
                     }
@@ -108,7 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getSinglePost: async (id) => {
                 try {
-                    const response = await fetch(POST_URL + `${id}`);
+                    const response = await fetch(url + `/posts` + `/${id}`);
                     if (!response.ok) {
                         throw new Error(`Error ${response.status}: ${response.statusText}`);
                     }
