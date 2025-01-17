@@ -21,7 +21,6 @@ const SinglePost = () => {
     return (
         <div className="container d-flex justify-content-center mt-5">
             <Card style={{ width: "100%", maxWidth: "600px" }}>
-                <Card.Img variant="top" src={image_url} alt={profession_title} />
                 <Card.Body>
                     <Card.Title>{profession_title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Localidad: {location}</Card.Subtitle>
@@ -29,6 +28,7 @@ const SinglePost = () => {
                         <strong>Precio por hora:</strong> ${price_per_hour}/h
                     </Card.Text>
                     <Card.Text>{description}</Card.Text>
+                    <Card.Img src={image_url} alt={profession_title} className="mb-2" />
                     <div className="d-flex justify-content-between">
                         <Button
                             variant="primary"
@@ -36,6 +36,7 @@ const SinglePost = () => {
                         >
                             Volver atrás
                         </Button>
+                        <Button variant="secondary">Ver Perfil</Button>
                         <Button variant="success">Contactar</Button>
                     </div>
                 </Card.Body>
