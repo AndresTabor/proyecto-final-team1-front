@@ -15,7 +15,7 @@ const PostsList = () => {
             <div className="row">
                 {store.posts.length > 0 ? (
                     store.posts.map((post) => (
-                        <div className="col-md-4" key={post.id}>
+                        <div className="col-12" key={post.id}>
                             <PostCard post={post} /> 
                         </div>
                     ))
