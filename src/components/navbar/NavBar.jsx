@@ -29,7 +29,7 @@ export const NavBar = () => {
                             <FaHome className="icons"/>
                             <h3>Inicio</h3>
                         </Link>
-                        <Link to = "/favoritos" className="favoritos d-flex align-item-center gap-2">
+                        <Link to = "/favorites" className="favoritos d-flex align-item-center gap-2">
                             <FaHeart className="icons"/>
                             <h3>Favoritos</h3>
                         </Link>

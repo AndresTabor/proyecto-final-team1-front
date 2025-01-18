@@ -10,6 +10,7 @@ import { Profile } from './views/profile';
 import PostSingleView from "./views/PostSingleView";
 import { NavBar } from "./components/navbar/NavBar"
 import './App.css'
+import { Favorites } from './views/Favorites';
 
 
 
@@ -27,8 +28,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/posts-list/:id" element={<PostSingleView />} />
-        <Route path='/favoritos' element = {<Favoritos/>} />
+        <Route path='/favorites' element = {<Favorites/>} />
         <Route path='/chats' element = {<Chats/>} />
+        
       </Routes>
     </BrowserRouter>
     
