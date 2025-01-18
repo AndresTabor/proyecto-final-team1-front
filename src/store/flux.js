@@ -1,4 +1,6 @@
 import { jwtDecode } from "jwt-decode";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../config/firebase-config";
 
 const getState = ({ getStore, getActions, setStore }) => {
 
@@ -227,6 +229,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem('user', JSON.stringify(store.user));
 				} catch (error) {
 					console.error("Error adding favorite", error);
+				}
+			},
+			sendMessage: async (senderId, receiverId, content) => {
+				console.log("Sending message...");
+				
+				try {
+				  await addDoc(collection(db, "messages"), {
+					senderId,
+					receiverId,
+					content,
+					timestamp: serverTimestamp(),
+				  });
+				  console.log("Message sent!");
+				} catch (error) {
+				  console.error("Error sending message: ", error);
 				}
 			}
 		}

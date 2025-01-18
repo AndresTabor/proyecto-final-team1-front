@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Inicio } from './navegacion/Inicio';
-import { Favoritos } from './navegacion/Favoritos';
-import { Chats } from './navegacion/Chats';
+import { Chats } from './views/Chats';
 import { Login } from "./views/login";
 import { Register } from "./views/register";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,8 +8,8 @@ import injectContext from './store/AppContext'
 import { Profile } from './views/profile';
 import PostSingleView from "./views/PostSingleView";
 import { NavBar } from "./components/navbar/NavBar"
-import './App.css'
 import { Favorites } from './views/Favorites';
+import './App.css'
 
 
 
