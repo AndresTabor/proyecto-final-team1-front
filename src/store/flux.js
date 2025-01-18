@@ -149,6 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 			uploadImageProfile: async (file) => {
 				const store = getStore();
+				const actions = getActions();
 				try {
                     const formData = new FormData();
 					formData.append('upload_preset','images_profile');
@@ -162,9 +163,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                         throw new Error(`Error ${resp.status}: ${resp.statusText}`);
                     }
 					const cloudResp = await resp.json();
-					console.log(cloudResp);
 					
-					setStore({user: {...store.user, image: cloudResp.secure_url}});
+					await actions.updateUser({image: cloudResp.secure_url});
+					
 
 				} catch (error) {
 					console.error("Error uploading image:", error);
