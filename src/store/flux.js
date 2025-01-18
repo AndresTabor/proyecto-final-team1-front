@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 	const url = "http://localhost:3000/"
+	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
 		store: {
@@ -146,6 +147,29 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error fetching single post:", error);
                 }
             },
+			uploadImageProfile: async (file) => {
+				const store = getStore();
+				try {
+                    const formData = new FormData();
+					formData.append('upload_preset','images_profile');
+					formData.append('file',file);
+
+					const resp = await fetch(cloudUrl, {
+						method: 'POST',
+						body: formData
+					})
+					if (!resp.ok) {
+                        throw new Error(`Error ${resp.status}: ${resp.statusText}`);
+                    }
+					const cloudResp = await resp.json();
+					console.log(cloudResp);
+					
+					setStore({user: {...store.user, image: cloudResp.secure_url}});
+
+				} catch (error) {
+					console.error("Error uploading image:", error);
+				}
+			},
 		}
 	};
 }

@@ -1,5 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../store/AppContext";
+import { FaEdit } from "react-icons/fa";
+import './styles/profile.css';
 
 
 export const Profile = () => {
@@ -8,8 +10,10 @@ export const Profile = () => {
     const [user, setUser] = useState({
         fullname: '',
         email: '',
-        // localization: '',
+        localization: '',
+        image: ''
     });
+    const imputFile = useRef(null);
 
 
     const handleEdit = () => {
@@ -21,12 +25,26 @@ export const Profile = () => {
         actions.updateUser(user);
         setIsEditing(false);
     };
+    
+    const handleEditPhto = () => {
+        imputFile.current.click();
+    };
+
+    const handleUploadImage =  (e) => {
+        console.log(e.target.files);
+        const file = e.target.files[0];
+        if (file) {
+            actions.uploadImageProfile(file);
+        }
+    };
 
 
     useEffect(() => {
         setUser({
             fullname: store.user.fullname,
-            email: store.user.email
+            email: store.user.email,
+            localization: store.user.localization,
+            image: store.user.image
         });
     }, [store.user]);
 
@@ -35,8 +53,13 @@ export const Profile = () => {
         <div className="container d-flex justify-content-center">
             <div className="card mb-5 mt-5 w-50 p-5">
                 <div className="row g-0">
-                    <div className="col-md-4 mt-3">
-                        <img src="https://cdn-icons-png.flaticon.com/512/4794/4794936.png" className="img-fluid rounded-start" alt="Foto" />
+                    <div className="col-md-4 mt-3 position-abosulte">
+                        <input ref={imputFile} onChange={handleUploadImage} type="file" accept="image/*" id="file" style={{ display: 'none' }} />
+                        <button className="btn-edit-image" onClick={handleEditPhto} type="file">
+                            <FaEdit />
+                        </button>
+                        
+                        <img src={user.image ? user.image : "https://cdn-icons-png.flaticon.com/512/4794/4794936.png" } className="img-fluid rounded-start" alt="Foto" />
                         {/* <p> className="card-title">email@email.com</p> */}
                     </div>
                     <div className="col-md-8">
@@ -46,7 +69,7 @@ export const Profile = () => {
                                 <form onSubmit={handleSave}>
                                     <input className="form-control mb-3" placeholder="Nombre" type="text" value={user.fullname} onChange={(e) => setUser({ ...user, fullname: e.target.value })} />
                                     <input className="form-control mb-3" placeholder="Email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
-                                    {/* <input className="form-control mb-3" placeholder="Localización" type="text" value={user.localization} onChange={(e) => setUser({ ...user, localization: e.target.value })} /> */}
+                                    <input className="form-control mb-3" placeholder="Localización" type="text" value={user.localization} onChange={(e) => setUser({ ...user, localization: e.target.value })} />
 
                                     <div className="text-end mt-5">
                                         <button onClick={handleSave} type='submit' className="btn btn-outline-primary">GUARDAR</button>

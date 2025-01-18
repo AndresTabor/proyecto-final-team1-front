@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Inicio } from './navegacion/Inicio';
 import { Favoritos } from './navegacion/Favoritos';
 import { Chats } from './navegacion/Chats';
-import React from "react";
 import { Login } from "./views/login";
 import { Register } from "./views/register";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
