@@ -17,6 +17,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLogin: () => {
 				const token = localStorage.getItem('token') || null;
 				const user = JSON.parse(localStorage.getItem('user') || null);
+				
+				if (!token) return false; 
+				const decoded = jwtDecode(token); 
+				const currentTime = Math.floor(Date.now() / 1000); 
+				const isTokenValid =  decoded.exp > currentTime; 	
+				if (!isTokenValid) {
+					localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    setStore({ token: null, user: {} });
+                    return false;
+				}
+						
 				if (token && user) {
                     setStore({ token: token, user: user });
                 }
@@ -112,7 +124,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
 					const userUpdated = await resp.json();
+					console.log(userUpdated);
+					
 					setStore({user: userUpdated})
+					localStorage.setItem('user', JSON.stringify(userUpdated));   
 				} catch (error) {
 					console.error("Error logout", error);
 				}

@@ -1,7 +1,6 @@
 import  { useState, useEffect, createContext } from "react";
 import getState from "./flux.js";
 
-
 export const Context = createContext(null);
 
 
@@ -18,6 +17,7 @@ const injectContext = PassedComponent => {
 					})
 			})
 		);
+		
 
 		useEffect(() => {
 			state.actions.isLogin();
