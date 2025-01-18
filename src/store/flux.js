@@ -186,6 +186,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error uploading image:", error);
 				}
 			},
+			removeFavorite: async (id) => {
+				const store = getStore();
+				try {
+					const resp = await fetch(`${url}/favorites/remove/${id}`, {
+						method: "DELETE",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+						}
+					});
+					if (!resp.ok) {
+						throw new Error(`Http error! status: ${resp.status}`);
+					}
+					const data = await resp.json();
+					console.log(data);
+					const newFavorites = store.user.following.filter(favorite => favorite.id !== id);
+					setStore({ user: { ...store.user, following: newFavorites } });
+					localStorage.setItem('user', JSON.stringify(store.user));
+				} catch (error) {
+					console.error("Error removing favorite", error);
+				}
+			},
+			addFavorite: async (id) => {
+				const store = getStore();
+				try {
+					const resp = await fetch(`${url}/favorites/add/${id}`, {
+						method: "POST",
+						headers: {
+							"Authorization": `Bearer ${store.token}`
+                        },
+						body: JSON.stringify({"user_to_id": id})
+					});
+
+					if (!resp.ok) {
+						throw new Error(`Http error! status: ${resp.status}`);
+					}
+					const data = await resp.json();
+					const newFavorites = [...store.user.following, data.favorite];
+					setStore({ user: {...store.user, following: newFavorites } });
+					localStorage.setItem('user', JSON.stringify(store.user));
+				} catch (error) {
+					console.error("Error adding favorite", error);
+				}
+			}
 		}
 	};
 }

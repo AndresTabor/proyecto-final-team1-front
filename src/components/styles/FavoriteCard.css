@@ -1,0 +1,86 @@
+/* From Uiverse.io by benjimich */
+.card-favorite {
+    width: 190px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f2f2f3;
+    border-radius: 12px;
+    box-shadow:  5px 5px 10px #a9a9aa77,
+        inset -5px -5px 10px #ffffff7e;
+    position: relative;
+}
+
+.card-favorite .img {
+    height: 100px;
+    aspect-ratio: 1;
+    border-radius: 30%;
+    background: #f2f2f3;
+    margin-bottom: 0.4em;
+    box-shadow: -5px -5px 8px #ffffff7a,
+        5px 5px 8px #a9a9aa7a;
+    overflow: hidden;
+}
+
+.card-favorite .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card-favorite .info {
+    text-align: center;
+    margin-top: 0.4em;
+    color: #2a2a2a;
+}
+
+.card-favorite .info>span {
+    color: #EB9E15;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.card-favorite .info>p {
+    font-size: 0.8em;
+    margin-top: 0.4em;
+}
+
+.card-favorite a {
+    margin-top: 1em;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(90deg, #EB9E15 0%, #d88f12 100%);
+    padding: .5em 2em;
+    border-radius: 0.7em;
+    text-align: center;
+}
+.card-favorite a:last-child {
+    margin-top: 1em;
+    border:  #EB9E15 2px solid;
+    background: none;
+    color: #EB9E15;
+    padding: .5em 2em;
+    border-radius: 0.7em;
+}
+
+.card-favorite a:active {
+    box-shadow: inset 3px 3px 3px #d88f12,
+        inset -3px -3px 3px #EB9E15;
+}
+
+.favorite-button {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    cursor: pointer;
+}
+
+.favorite-button i {
+    color: #EB9E15;
+}
+
+.favorite-button i:hover {
+    color: #d88f12;
+}
