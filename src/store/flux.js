@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
 		store: {
-			user: [],
+			user: {},
 			token: null,
 			posts: [],
 			singlePost: null

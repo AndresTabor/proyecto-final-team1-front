@@ -6,7 +6,7 @@ const PostsList = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.fetchPosts();
+        //actions.fetchPosts();
     }, []);
 
     return (
