@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import  Logo  from "../assets/images/imagenlogo.webp"
+import Logo from "../assets/images/imagenlogo.webp"
 import { Context } from "../store/AppContext";
 
 
 export const Login = () => {
 
-   
-    const {store, actions} = useContext(Context);
-    const {error} = store;
+
+    const { store, actions } = useContext(Context);
+    const { error } = store;
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -16,10 +16,20 @@ export const Login = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //url del codeSpace
-       
-        await actions.login(user)
-        // navigate("/profile");
+        
+        try {
+            const resp = await actions.login(user)
+            console.log(resp);
+            
+            
+            navigate("/profile");
+        } catch (error) {
+            console.log("Algo salió mal");
+            
+        }
+
+
+
 
     };
 
@@ -31,7 +41,7 @@ export const Login = () => {
     return (
         <div className="container mt-5 w-50 p-5">
             <div className="d-flex justify-content-center form-control-lg">
-                <img className= "rounded-circle mb-5 mt-0" src={Logo} alt="Logo"/>
+                <img className="rounded-circle mb-5 mt-0" src={Logo} alt="Logo" />
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-5">
@@ -43,7 +53,7 @@ export const Login = () => {
                         onChange={(e) => setUser({ ...user, email: e.target.value })}
                         required
                     />
-                    
+
                 </div>
 
 
@@ -56,21 +66,21 @@ export const Login = () => {
                         onChange={(e) => setUser({ ...user, password: e.target.value })}
                         required
                     />
-                   {
-                    error && (<div className="alert-sm text-danger text-center mt-3" role="alert">
-                        {error}
-                      </div>)
-                   }
+                    {
+                        error && (<div className="alert-sm text-danger text-center mt-3" role="alert">
+                            Usuario o contraseña incorrecto.
+                        </div>)
+                    }
                 </div>
                 <div className="d-grid gap-2 col-3 mx-auto">
-                <button type='submit' className="btn btn-outline-primary">INGRESAR</button>
-                <button type='submit' className="btn btn-outline-primary" onClick={handleLogout}>CERRAR SESIÓN</button>
+                    <button type='submit' className="btn btn-outline-primary">INGRESAR</button>
+                    <button type='submit' className="btn btn-outline-primary" onClick={handleLogout}>CERRAR SESIÓN</button>
                 </div>
                 <div className="text-end mt-5">
-                <p className="text-center">¿No tienes cuenta? Regístrate</p>
+                    <p className="text-center">¿No tienes cuenta? Regístrate</p>
                 </div>
                 <div className="text-center">
-                <Link to = "/register">REGISTRARSE</Link>
+                    <Link to="/register">REGISTRARSE</Link>
                 </div>
             </form>
         </div>

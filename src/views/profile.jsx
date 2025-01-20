@@ -94,7 +94,7 @@ export const Profile = () => {
                                     
 
                                     <div className="text-end mt-5">
-                                        <button onClick={() => setIsEditing(false)} type='submit' className="btn btn-outline-primary">CANCELAR</button>
+                                        <button onClick={() => setIsEditing(false)} type='submit' className="btn btn-outline-primary mx-2">CANCELAR</button>
                                         <button onClick={handleSave} type='submit' className="btn btn-outline-primary">GUARDAR</button>
                                     </div>
 
@@ -103,13 +103,13 @@ export const Profile = () => {
                             ) : (
                                 <div className="cuadro">
 
-                                    <p className="card-title">Nombre: {store.user.fullname}</p>
-                                    <p className="card-title">Email: {store.user.email}</p>
-                                    <p className="card-title">Localización: {store.user.localization} </p>
-                                    <p className="card-title">Fecha registro: {store.user.date_at} </p>
+                                    <p className="card-title"><strong>NOMBRE: </strong>{store.user.fullname}</p>
+                                    <p className="card-title"><strong>EMAIL: </strong>{store.user.email}</p>
+                                    <p className="card-title"><strong>LOCALIZACIÓN: </strong>{store.user.localization} </p>
+                                    <p className="card-title"><strong>FECHA DE REGISTRO: </strong>{store.user.date_at} </p>
 
                                     <div className="text-end mt-5">
-                                        <button type="submit" className="btn btn-outline-primary ml-5 "><i className="fa-solid fa-heart-circle-check"></i></button>
+                                        <button type="submit" className="btn btn-outline-primary ml-5 mx-2 "><i className="fa-solid fa-heart-circle-check"></i></button>
                                         <button onClick={handleEdit} type='submit' className="btn btn-outline-primary">EDITAR</button>
                                     </div>
 

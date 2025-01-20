@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const getState = ({ getStore, getActions, setStore }) => {
 
@@ -59,11 +60,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					localStorage.setItem('user', JSON.stringify(user));        
 					console.log(user, payload);
-					setStore ({error: null})
+					setStore ({error: null});
+					
+					
 
 				} catch (error) {
 					console.error("Error loading user", error);
-
+					throw error
 				}
 			},
 
