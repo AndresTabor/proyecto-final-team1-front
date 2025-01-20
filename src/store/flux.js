@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 	const url = "https://musical-space-engine-wg7r6p5g7wc5g9r-3000.app.github.dev"
+	const url_posts = "https://musical-space-engine-wg7r6p5g7wc5g9r-3000.app.github.dev/posts"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
@@ -147,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//GET all posts
 			fetchPosts: async () => {
                 try {
-                    const response = await fetch(url + `/posts`);
+                    const response = await fetch(url_posts);
                     if (!response.ok) {
                         throw new Error('Error al obtener las publicaciones');
                     }
@@ -164,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//GET 1 post por id
 			getSinglePost: async (id) => {
                 try {
-                    const response = await fetch(url + `/posts` + `/${id}`);
+                    const response = await fetch(`${url_posts}/${id}`);
                     if (!response.ok) {
                         throw new Error(`Error ${response.status}: ${response.statusText}`);
                     }
@@ -174,7 +175,35 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error fetching single post:", error);
                 }
             },
-
+			// PUT editar post 
+			updatePost: async (id, updatedData) => {
+				//const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(`${url_posts}/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							//Authorization: `${token}`
+						},
+						body: JSON.stringify(updatedData)
+					});
+					if (!response.ok) {
+						const errorData = await response.json();
+						throw new Error(errorData.error || "Error al actualizar el post");
+					}
+					const data = await response.json();
+					setStore({
+						posts: getStore().posts.map(post =>
+							post.id === id ? { ...post, ...data.data } : post
+						)
+					});
+					return { success: true, message: "Post actualizado correctamente" };
+				} catch (error) {
+					console.error("Error al actualizar el post:", error);
+					return { success: false, message: error.message };
+				}
+			},
+			
 
 
 			uploadImageProfile: async (file) => {
