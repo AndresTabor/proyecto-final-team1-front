@@ -29,3 +29,13 @@ input {
     border-radius: 5px; 
     padding: 10px;
   }
+
+  .mensaje-validacion {
+    font-size: 12px;
+    color: red;
+    
+  }
+
+  .alert-sm {
+    font-size: 12px;
+  }

@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import  Logo  from "../assets/images/imagenlogo.webp"
 import { Context } from "../store/AppContext";
 
+
 export const Login = () => {
 
-    const {actions} = useContext(Context);
+   
+    const {store, actions} = useContext(Context);
+    const {error} = store;
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -16,17 +19,19 @@ export const Login = () => {
         //url del codeSpace
        
         await actions.login(user)
-        navigate("/profile");
+        // navigate("/profile");
 
     };
 
     const handleLogout = () => {
         actions.logout();
     };
+
+
     return (
         <div className="container mt-5 w-50 p-5">
             <div className="d-flex justify-content-center form-control-lg">
-                <img className= "rounded-circle mb-5" src={Logo} alt="Logo"/>
+                <img className= "rounded-circle mb-5 mt-0" src={Logo} alt="Logo"/>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-5">
@@ -51,6 +56,11 @@ export const Login = () => {
                         onChange={(e) => setUser({ ...user, password: e.target.value })}
                         required
                     />
+                   {
+                    error && (<div className="alert-sm text-danger text-center mt-3" role="alert">
+                        {error}
+                      </div>)
+                   }
                 </div>
                 <div className="d-grid gap-2 col-3 mx-auto">
                 <button type='submit' className="btn btn-outline-primary">INGRESAR</button>

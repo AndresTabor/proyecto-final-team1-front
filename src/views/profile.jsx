@@ -4,8 +4,10 @@ import { FaEdit } from "react-icons/fa";
 import './styles/profile.css';
 
 
+
 export const Profile = () => {
     const { store, actions } = useContext(Context);
+    const [error, setError] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [user, setUser] = useState({
         fullname: '',
@@ -22,22 +24,36 @@ export const Profile = () => {
 
     const handleSave = (e) => {
         e.preventDefault();
-        actions.updateUser(user);
-        setIsEditing(false);
+        if (user.fullname.length < 4) {
+            setError("El nombre tiene que tener como mínimo 4 caracteres.")
+        }
+        else {
+            actions.updateUser(user);
+            setIsEditing(false);
+            setError(null);
+        }
+        // if (user.localization.length < 3) {
+        //     setError("El nombre tiene que tener como mínimo 3 caracteres.")
+        // }
+        // else {
+        //     actions.updateUser(user);
+        //     setIsEditing(false);
+        //     setError(null);
+        // }
     };
-    
+
+
     const handleEditPhto = () => {
         imputFile.current.click();
     };
 
-    const handleUploadImage =  (e) => {
+    const handleUploadImage = (e) => {
         console.log(e.target.files);
         const file = e.target.files[0];
         if (file) {
             actions.uploadImageProfile(file);
         }
     };
-
 
     useEffect(() => {
         setUser({
@@ -58,8 +74,8 @@ export const Profile = () => {
                         <button className="btn-edit-image" onClick={handleEditPhto} type="file">
                             <FaEdit />
                         </button>
-                        
-                        <img src={user.image ? user.image : "https://cdn-icons-png.flaticon.com/512/4794/4794936.png" } className="img-fluid rounded-start" alt="Foto" />
+
+                        <img src={user.image ? user.image : "https://cdn-icons-png.flaticon.com/512/4794/4794936.png"} className="img-fluid rounded-start" alt="Foto" />
                         {/* <p> className="card-title">email@email.com</p> */}
                     </div>
                     <div className="col-md-8">
@@ -67,11 +83,18 @@ export const Profile = () => {
 
                             {isEditing ? (
                                 <form onSubmit={handleSave}>
-                                    <input className="form-control mb-3" placeholder="Nombre" type="text" value={user.fullname} onChange={(e) => setUser({ ...user, fullname: e.target.value })} />
-                                    <input className="form-control mb-3" placeholder="Email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                                    <input className="form-control mb-3" min={4} placeholder="Nombre" type="text" value={user.fullname} onChange={(e) => setUser({ ...user, fullname: e.target.value })} />
+                                    {/* <input className="form-control mb-3" placeholder="Email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} /> */}
                                     <input className="form-control mb-3" placeholder="Localización" type="text" value={user.localization} onChange={(e) => setUser({ ...user, localization: e.target.value })} />
 
+                                    
+                                        {error && (<div className="alert-sm text-danger text-center" role="alert">{error}</div>)}
+                                        
+                                            
+                                    
+
                                     <div className="text-end mt-5">
+                                        <button onClick={() => setIsEditing(false)} type='submit' className="btn btn-outline-primary">CANCELAR</button>
                                         <button onClick={handleSave} type='submit' className="btn btn-outline-primary">GUARDAR</button>
                                     </div>
 
@@ -79,10 +102,10 @@ export const Profile = () => {
                                 </form>
                             ) : (
                                 <div className="cuadro">
-                                   
+
                                     <p className="card-title">Nombre: {store.user.fullname}</p>
                                     <p className="card-title">Email: {store.user.email}</p>
-                                    <p className="card-title">Localización: </p>
+                                    <p className="card-title">Localización: {store.user.localization} </p>
                                     <p className="card-title">Fecha registro: {store.user.date_at} </p>
 
                                     <div className="text-end mt-5">

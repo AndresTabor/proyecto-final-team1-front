@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/images/imagenlogo.webp"
 import { Context } from "../store/AppContext";
+import { Store } from "@mui/icons-material";
 
 export const Register = () => {
 
@@ -16,7 +17,8 @@ export const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(user);
-        
+
+     
         await actions.register(user)
         navigate("/login");
 
@@ -60,6 +62,8 @@ export const Register = () => {
                         onChange={(e) => setUser({ ...user, password: e.target.value })}
                         required
                     />
+                  
+                   <p className="mensaje-validacion mt-2 text-center">La contraseña debe contener al menos 8 caracteres, incluyendo al menos una mayúscula, una minúscula y un número.</p>
                 </div>
                 <div className="d-grid gap-2 col-3 mx-auto">
                     <button type='submit' className="btn btn-outline-primary mt-5">REGISTRARSE</button>

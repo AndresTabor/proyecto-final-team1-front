@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "http://localhost:3000/"
+	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user: [],
 			token: null,
 			posts: [],
-			singlePost: null
+			singlePost: null,
+			error: null
 		},
 		actions: {
 			isLogin: () => {
@@ -43,10 +44,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(newUser),
 					});
+					const data = await resp.json();
 					if (!resp.ok) {
+						
+						setStore({error: data.msg})
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
-					const data = await resp.json();
+					
 					setStore ({token: data.access_token})
 					localStorage.setItem('token', data.access_token);
 					const payload = jwtDecode(data.access_token);
@@ -55,6 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					localStorage.setItem('user', JSON.stringify(user));        
 					console.log(user, payload);
+					setStore ({error: null})
 
 				} catch (error) {
 					console.error("Error loading user", error);
@@ -75,12 +80,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(newUser),
 					});
-					
+					const data = await resp.json();
+
 					if (!resp.ok) {
+						setStore({error: data.msg})
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
 					// await getActions();
-					const data = await resp.json();
+					
+				
 					console.log (data);
 					
 				} catch (error) {
@@ -120,10 +128,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(data)
 					});
+					const userUpdated = await resp.json();
 					if (!resp.ok) {
+						setStore({error: data.msg})
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
-					const userUpdated = await resp.json();
+					
 					console.log(userUpdated);
 					
 					setStore({user: userUpdated})
