@@ -1,0 +1,7 @@
+.conversation{
+    border-bottom: 2px solid #658cb8;
+}
+
+.conversation:hover{
+    background-color: #a6cae4 !important;
+}

@@ -1,3 +1,9 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 body {
     background-color: #C6E7FF !important;
 }

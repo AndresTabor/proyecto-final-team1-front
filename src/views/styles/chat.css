@@ -1,0 +1,78 @@
+.chat-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 5rem;
+}
+
+.chat-container> :first-child {
+    width: 30%;
+}
+
+.chat-container> :last-child {
+    width: 70%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 1rem;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+}
+
+.search__input {
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: #f4f2f2;
+    border: none;
+    color: #646464;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    transition: all ease-in-out .5s;
+    margin: 0 1em;
+}
+
+.search__input:hover, .search__input:focus {
+    box-shadow: 0 0 1em #00000013;
+}
+
+.search__input:focus {
+    outline: none;
+    background-color: #f0eeee;
+}
+
+.search__input::-webkit-input-placeholder {
+    font-weight: 100;
+    color: #ccc;
+}
+
+.send-message {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+}
+.btn-send-message {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border: none;
+    background-color: #f4f2f2;
+    border-radius: 50%;
+    padding: 2px 
+}
+
+.btn-send-message:active {
+    background-color: #f8a10b;
+}
+
+#inputMessage {
+    width: 50%;
+}
+

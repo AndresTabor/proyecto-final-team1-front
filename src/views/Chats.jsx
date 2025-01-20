@@ -3,91 +3,89 @@ import { Context } from "../store/AppContext";
 import useMessages from "../common/hooks/useMessage";
 import useConversations from "../common/hooks/useConversations";
 
+import { mockConversations } from "../common/mocks/conversations";
+import { mockMessages } from "../common/mocks/messages";
+import ConversationsList from "../components/ConversationsList";
+import MessagesList from "../components/MessagesList";
+import { BsFillSendFill } from "react-icons/bs";
+
+import "./styles/chat.css";
 
 export const Chats = () => {
   const { store, actions } = useContext(Context);
-  const id = 2;
-  const [selectedChatId, setSelectedChatId] = useState(1);
   const [newMessage, setNewMessage] = useState("");
-  const conversations = useConversations(id);
-  const messages = useMessages(id, selectedChatId);
-  
-  const handleSendMessage = async () => {
+
+  const id = 2;
+  const [selectedChatId, setSelectedChatId] = useState();
+  const [conversationsFiltered, setConversationsFiltered] =
+    useState(mockConversations);
+
+  // const conversations = useConversations(id);
+  // const messages = useMessages(id, selectedChatId);
+
+  const handleSelectedChat = (chatId) => {
+    setSelectedChatId(chatId);
+  };
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
     if (newMessage && selectedChatId) {
       await actions.sendMessage(id, selectedChatId, newMessage);
       setNewMessage("");
     }
   };
+  
+  const handleSearchConversation = (e) => {
+    const searchQuery = e.target.value.toLowerCase();
+    const filteredConversations = mockConversations.filter((conversation) =>
+      conversation.fullname.toLowerCase().includes(searchQuery)
+    );
+    setConversationsFiltered(filteredConversations);
+  };
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <div style={{ width: "30%", borderRight: "1px solid #ccc", overflowY: "auto" }}>
-        <h4>Conversations</h4>
-        <ul>
-          {conversations.map((conversation) => (
-            <li
-              key={conversation.id}
-              style={{
-                padding: "10px",
-                cursor: "pointer",
-                background: conversation.id === selectedChatId ? "#eee" : "transparent",
-              }}
-              onClick={() => setSelectedChatId(conversation.id)}
-            >
-              <strong>{conversation.id}</strong>
-              <p>{conversation.lastMessage}</p>
-              <small>
-                {new Date(conversation.timestamp?.seconds * 1000).toLocaleString()}
-              </small>
-            </li>
-          ))}
-        </ul>
+    <div className="d-flex chat-container">
+      <div className="">
+        <div className="search">
+          <input
+            type="text"
+            className="search__input"
+            placeholder="Buscar chat"
+            onChange={handleSearchConversation}
+          />
+        </div>
+        <ConversationsList
+          mockConversations={conversationsFiltered}
+          selectChat={handleSelectedChat}
+          selectedChatId={selectedChatId}
+        />
       </div>
-      <div style={{ flex: 1, padding: "10px", display: "flex", flexDirection: "column" }}>
+      <div className="px-3">
         {selectedChatId ? (
           <>
-            <div style={{ flex: 1, overflowY: "auto" }}>
-              <h4>Chat with {selectedChatId}</h4>
-              <ul>
-                {messages.map((msg) => (
-                  <li
-                    key={msg.id}
-                    style={{
-                      textAlign: msg.senderId === id ? "right" : "left",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        display: "inline-block",
-                        padding: "10px",
-                        borderRadius: "10px",
-                        background: msg.senderId === id ? "#d1f7c4" : "#f1f1f1",
-                      }}
-                    >
-                      {msg.content}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div style={{ marginTop: "10px" }}>
+            <MessagesList
+              messages={mockMessages}
+              userId={id}
+              selectedChatId={selectedChatId}
+            />
+            <form className="send-message" onSubmit={handleSendMessage}>
               <input
+                id="inputMessage"
                 type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                style={{ width: "80%", padding: "10px" }}
-                placeholder="Type a message..."
+                className="search__input"
+                placeholder="Escribe un mensaje..."
               />
-              <button onClick={handleSendMessage} style={{ padding: "10px" }}>
-                Send
+              <button type="submit" className="btn-send-message">
+                <BsFillSendFill />
               </button>
-            </div>
+            </form>
           </>
         ) : (
-          <h4>Select a conversation to start chatting</h4>
+          <h4>Seleccione una conversación para iniciar a chatear</h4>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
