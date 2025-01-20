@@ -12,7 +12,7 @@ export const Profile = () => {
     const [user, setUser] = useState({
         fullname: '',
         email: '',
-        localization: '',
+        location: '',
         image: ''
     });
     const imputFile = useRef(null);
@@ -59,7 +59,7 @@ export const Profile = () => {
         setUser({
             fullname: store.user.fullname,
             email: store.user.email,
-            localization: store.user.localization,
+            location: store.user.location,
             image: store.user.image
         });
     }, [store.user]);
@@ -85,7 +85,7 @@ export const Profile = () => {
                                 <form onSubmit={handleSave}>
                                     <input className="form-control mb-3" min={4} placeholder="Nombre" type="text" value={user.fullname} onChange={(e) => setUser({ ...user, fullname: e.target.value })} />
                                     {/* <input className="form-control mb-3" placeholder="Email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} /> */}
-                                    <input className="form-control mb-3" placeholder="Localización" type="text" value={user.localization} onChange={(e) => setUser({ ...user, localization: e.target.value })} />
+                                    <input className="form-control mb-3" placeholder="Localización" type="text" value={user.location} onChange={(e) => setUser({ ...user, location: e.target.value })} />
 
                                     
                                         {error && (<div className="alert-sm text-danger text-center" role="alert">{error}</div>)}
@@ -105,7 +105,7 @@ export const Profile = () => {
 
                                     <p><strong className="letra-perfil">NOMBRE: </strong>{store.user.fullname}</p>
                                     <p><strong className="letra-perfil">EMAIL: </strong>{store.user.email}</p>
-                                    <p><strong className="letra-perfil">LOCALIZACIÓN: </strong>{store.user.localization} </p>
+                                    <p><strong className="letra-perfil">LOCALIZACIÓN: </strong>{store.user.location} </p>
                                     <p><strong className="letra-perfil">FECHA DE REGISTRO: </strong>{store.user.date_at} </p>
 
                                     <div className="text-end mt-5">
