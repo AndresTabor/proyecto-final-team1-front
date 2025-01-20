@@ -1,5 +1,5 @@
 import React from 'react';
-import PostsList from '../components/PostsList'; // Ajusta la ruta según tu estructura de carpetas
+import PostsList from '../components/PostsList';
 
 const PostsView = () => {
     return (
