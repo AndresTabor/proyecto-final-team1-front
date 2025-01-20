@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
+	const url = "https://musical-space-engine-wg7r6p5g7wc5g9r-3000.app.github.dev"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
@@ -143,6 +143,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			//  ---- POSTS endpoints ----
+			//GET all posts
 			fetchPosts: async () => {
                 try {
                     const response = await fetch(url + `/posts`);
@@ -159,7 +161,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error al hacer la petición:', error);
                 }
             },
-
+			//GET 1 post por id
 			getSinglePost: async (id) => {
                 try {
                     const response = await fetch(url + `/posts` + `/${id}`);
@@ -172,6 +174,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error fetching single post:", error);
                 }
             },
+
+
+
 			uploadImageProfile: async (file) => {
 				const store = getStore();
 				const actions = getActions();
