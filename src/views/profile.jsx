@@ -66,10 +66,10 @@ export const Profile = () => {
 
 
     return (
-        <div className="container d-flex justify-content-center">
+        <div className="container-profile d-flex justify-content-center">
             <div className="card mb-5 mt-5 w-50 p-5">
                 <div className="row g-0">
-                    <div className="col-md-4 mt-3 position-abosulte">
+                    <div className="col-md-4 position-abosulte">
                         <input ref={imputFile} onChange={handleUploadImage} type="file" accept="image/*" id="file" style={{ display: 'none' }} />
                         <button className="btn-edit-image" onClick={handleEditPhto} type="file">
                             <FaEdit />
@@ -78,7 +78,7 @@ export const Profile = () => {
                         <img src={user.image ? user.image : "https://cdn-icons-png.flaticon.com/512/4794/4794936.png"} className="img-fluid rounded-start" alt="Foto" />
                         {/* <p> className="card-title">email@email.com</p> */}
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-8 mt-4">
                         <div className="card-body">
 
                             {isEditing ? (
@@ -103,10 +103,10 @@ export const Profile = () => {
                             ) : (
                                 <div className="cuadro">
 
-                                    <p className="card-title"><strong>NOMBRE: </strong>{store.user.fullname}</p>
-                                    <p className="card-title"><strong>EMAIL: </strong>{store.user.email}</p>
-                                    <p className="card-title"><strong>LOCALIZACIÓN: </strong>{store.user.localization} </p>
-                                    <p className="card-title"><strong>FECHA DE REGISTRO: </strong>{store.user.date_at} </p>
+                                    <p><strong className="letra-perfil">NOMBRE: </strong>{store.user.fullname}</p>
+                                    <p><strong className="letra-perfil">EMAIL: </strong>{store.user.email}</p>
+                                    <p><strong className="letra-perfil">LOCALIZACIÓN: </strong>{store.user.localization} </p>
+                                    <p><strong className="letra-perfil">FECHA DE REGISTRO: </strong>{store.user.date_at} </p>
 
                                     <div className="text-end mt-5">
                                         <button type="submit" className="btn btn-outline-primary ml-5 mx-2 "><i className="fa-solid fa-heart-circle-check"></i></button>

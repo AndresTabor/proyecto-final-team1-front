@@ -39,3 +39,11 @@ input {
   .alert-sm {
     font-size: 12px;
   }
+
+  .container-profile {
+    font-family:M PLUS Rounded 1c;
+  }
+
+  .letra-perfil {
+    color: #6A80B9
+  }
