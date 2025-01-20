@@ -1,23 +1,97 @@
-img{
-    width:220px;
+.navbar-top {
+    width: 100%;
+    background-color: rgb(218, 218, 218);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    font-family: "M PLUS Rounded 1c";
+    font-weight:bold;
 }
 
-.icons{
-    color:#EB9E15;
-    font-size:2em;
+/* Logo */
+.logo-letras img {
+    width: 10em; 
+    padding: 4px;
 }
 
-/* Quita los estilos predeterminados de los Links */
-.navbar a {
-    text-decoration: none; /* Elimina el subrayado */
-    color: black; /* Hereda el color del contenedor */
+.left-items {
+    display: flex;
+    gap: 15px;
+    margin-left: 30px;
 }
 
-.navbar a:hover {
-    color: #f8a10b; /* Cambia el color al pasar el cursor */
+.right-items {
+    display: flex;
+    gap: 15px;
+    margin-left: auto; 
+    margin-right: 40px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
-.bg-body-tertiary{
-    background-color: #E8F9FF !important;
+li {
+    color: white;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    font-size: 1.4em;
+}
+
+a:hover {
+    transform: scale(1.1); 
+}
+
+a svg {
+    font-size: 1.8rem; 
+    margin-right: 10px; 
+    color: #EA9D15;
+}
+
+.navbar-bottom {
+    display: none;
+    width: 100%;
+    background-color: rgb(198, 188, 188);
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+}
+
+.navbar-bottom ul {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin: 0;
+}
+
+.navbar-bottom a svg {
+    font-size: 1.6em;
+    color: #EA9D15;
+}
+
+
+@media screen and (max-width: 768px) {
+    .navbar-top {
+        display: none;
+    }
+
+    .navbar-bottom {
+        display: block;
+    }
 }
