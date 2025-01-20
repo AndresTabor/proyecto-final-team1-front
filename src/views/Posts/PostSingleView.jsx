@@ -1,5 +1,5 @@
 import React from 'react';
-import SinglePost from '../components/PostSingle';
+import SinglePost from '../../components/PostSingle';
 
 const PostSingleView = () => {
     return (
