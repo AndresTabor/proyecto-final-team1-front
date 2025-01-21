@@ -66,7 +66,7 @@ export const Chats = () => {
             <MessagesList
               messages={mockMessages}
               userId={id}
-              selectedChatId={selectedChatId}
+              name={"Andres"}
             />
             <form className="send-message" onSubmit={handleSendMessage}>
               <input

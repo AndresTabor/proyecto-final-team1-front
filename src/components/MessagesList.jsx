@@ -2,18 +2,18 @@
 import PropTypes from 'prop-types'
 import "./styles/MessagesList.css"
 
-const MessagesList = ({messages, userId, selectedChatId}) => {
+const MessagesList = ({messages, userId, name}) => {
   return (
     <div className='overflow-y-auto'>
-        <h4 className='ms-3'>Chat with {selectedChatId}</h4>
+        <h4 className='ms-3 mb-4 text-center' >Chat with {name}</h4>
         <ul>
         {messages.map((msg) => (
             <li
             key={msg.id}
             style={{
                 textAlign: msg.senderId === userId ? "right" : "left",
-                marginBottom: "10px",
             }}
+            className='message'
             >
             <span
                 style={{
@@ -34,7 +34,7 @@ const MessagesList = ({messages, userId, selectedChatId}) => {
 MessagesList.propTypes = {
   messages: PropTypes.array.isRequired,
   userId: PropTypes.number.isRequired,
-  selectedChatId: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
 }
 
 export default MessagesList

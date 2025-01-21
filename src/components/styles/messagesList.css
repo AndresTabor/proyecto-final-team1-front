@@ -1,0 +1,10 @@
+.message{
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+    
+    .message{
+        margin-bottom: 1.4rem;
+    }
+}
