@@ -7,8 +7,9 @@
     left: 0;
     top: 0;
     z-index: 100;
-    font-family: "M PLUS Rounded 1c";
-    font-weight:bold;
+    /* font-family: "M PLUS Rounded 1c"; */
+    font-family: "Calistoga";
+    /* font-weight:bold; */
 }
 
 /* Logo */
