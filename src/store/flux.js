@@ -3,8 +3,8 @@ import { jwtDecode } from "jwt-decode";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://musical-space-engine-wg7r6p5g7wc5g9r-3000.app.github.dev"
-	const url_posts = "https://musical-space-engine-wg7r6p5g7wc5g9r-3000.app.github.dev/posts"
+	const url = "http://localhost:3000/"
+	const url_posts = "http://localhost:3000/posts"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
