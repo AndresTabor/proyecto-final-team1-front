@@ -17,7 +17,12 @@ const PostCard = ({ post }) => {
                     <Col xs={12} className="d-flex justify-content-between align-items-center">
                         <div>
                             <Card.Title className="fw-bold">{post.profession_title}</Card.Title>
-                            <Card.Subtitle className="text-muted">Localidad: {post.location}</Card.Subtitle>
+                            <div className="container d-flex justify-content-center ">
+                                <Card.Subtitle className="text-muted mx-2">Localidad: {post.location}</Card.Subtitle>
+                                <Card.Subtitle className="text-muted mx-2">
+                                    Publicado por: <span className="fw-bold">{post.user.fullname}</span>
+                                </Card.Subtitle>
+                            </div>
                         </div>
                         <Card.Text className="fw-bold text-end" style={{ fontSize: '1.2rem' }}>
                             ${post.price_per_hour} / h
@@ -43,7 +48,7 @@ const PostCard = ({ post }) => {
                             className="text-primary p-0 fw-bold"
                             style={{ textDecoration: 'none' }}
                             onClick={() => navigate(`/posts-list/${post.id}`)}
-                            >Ver más +
+                        >Ver más +
                         </Button>
                     </Col>
                 </Row>
