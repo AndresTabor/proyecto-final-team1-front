@@ -39,12 +39,12 @@ export const Login = () => {
 
 
     return (
-        <div className="container mt-5 w-50 p-5">
+        <div className="container w-50 p-5">
             <div className="d-flex justify-content-center form-control-lg">
-                <img className="rounded-circle mb-5 mt-0" src={Logo} alt="Logo" />
+                <img className="rounded-circle mb-3 mt-0" src={Logo} alt="Logo" />
             </div>
             <form onSubmit={handleSubmit}>
-                <div className="mb-5">
+                <div className="mb-4">
                     <input
                         className="form-control"
                         placeholder="Email" aria-label="Recipient's username" aria-describedby="basic-addon2"
@@ -76,13 +76,14 @@ export const Login = () => {
                     <button type='submit' className="btn btn-outline-primary">INGRESAR</button>
                     <button type='submit' className="btn btn-outline-primary" onClick={handleLogout}>CERRAR SESIÓN</button>
                 </div>
-                <div className="text-end mt-5">
+                <div className="text-end mt-4">
                     <p className="text-center">¿No tienes cuenta? Regístrate</p>
                 </div>
                 <div className="text-center">
                     <Link to="/register">REGISTRARSE</Link>
                 </div>
             </form>
+                
         </div>
 
     )

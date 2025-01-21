@@ -11,6 +11,7 @@ import PostSingleView from "./views/PostSingleView";
 import { NavBar } from "./components/navbar/NavBar"
 import './App.css'
 import { Favorites } from './views/Favorites';
+import { Footer } from './components/Footer';
 
 
 
@@ -32,6 +33,8 @@ function App() {
         <Route path='/chats' element = {<Chats/>} />
         
       </Routes>
+      <Footer />
+
     </BrowserRouter>
     
   )

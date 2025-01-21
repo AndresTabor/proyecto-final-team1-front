@@ -3,6 +3,7 @@ import { Context } from "../store/AppContext";
 import { FaEdit } from "react-icons/fa";
 import './styles/profile.css';
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 
 export const Profile = () => {
@@ -109,17 +110,13 @@ export const Profile = () => {
                                     <p><strong className="letra-perfil">FECHA DE REGISTRO: </strong>{moment(store.user.date_at).format("DD/MM/YYYY")} </p>
 
                                     <div className="text-end mt-5">
-                                        <button type="submit" className="btn btn-outline-primary ml-5 mx-2 "><i className="fa-solid fa-heart-circle-check"></i></button>
+                                        <Link to={"/favorites"} className="btn btn-outline-primary ml-5 mx-2 "><i className="fa-solid fa-heart-circle-check"></i></Link>
                                         <button onClick={handleEdit} type='submit' className="btn btn-outline-primary">EDITAR</button>
                                     </div>
 
                                 </div>
                             )}
 
-
-
-
-                            {/* <p className="card-text mt-3"><small className="text-body-secondary">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam est laborum reiciendis. Ab totam officia officiis reprehenderit vitae, dolorem accusamus? Excepturi velit aperiam, iusto ducimus enim laudantium praesentium error suscipit?</small></p> */}
 
                         </div>
                     </div>
