@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../store/AppContext";
 import { FaEdit } from "react-icons/fa";
 import './styles/profile.css';
-
+import moment from "moment";
 
 
 export const Profile = () => {
@@ -106,7 +106,7 @@ export const Profile = () => {
                                     <p><strong className="letra-perfil">NOMBRE: </strong>{store.user.fullname}</p>
                                     <p><strong className="letra-perfil">EMAIL: </strong>{store.user.email}</p>
                                     <p><strong className="letra-perfil">LOCALIZACIÓN: </strong>{store.user.location} </p>
-                                    <p><strong className="letra-perfil">FECHA DE REGISTRO: </strong>{store.user.date_at} </p>
+                                    <p><strong className="letra-perfil">FECHA DE REGISTRO: </strong>{moment(store.user.date_at).format("DD/MM/YYYY")} </p>
 
                                     <div className="text-end mt-5">
                                         <button type="submit" className="btn btn-outline-primary ml-5 mx-2 "><i className="fa-solid fa-heart-circle-check"></i></button>
