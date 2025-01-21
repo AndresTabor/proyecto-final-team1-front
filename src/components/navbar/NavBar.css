@@ -15,7 +15,7 @@
 /* Logo */
 .logo-letras img {
     width: 9em; 
-    padding: 4px;
+    padding: 2px;
 }
 
 .left-items {
@@ -51,7 +51,7 @@ a {
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 6px;
+    padding: 2px;
     font-size: 1.6em;
 }
 
