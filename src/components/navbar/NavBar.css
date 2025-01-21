@@ -1,6 +1,6 @@
 .navbar-top {
     width: 100%;
-    background-color: rgb(218, 218, 218);
+    background-color: #E8F9FF;
     display: flex;
     align-items: center;
     position: fixed;
@@ -13,7 +13,7 @@
 
 /* Logo */
 .logo-letras img {
-    width: 10em; 
+    width: 9em; 
     padding: 4px;
 }
 
@@ -51,7 +51,7 @@ a {
     display: flex;
     align-items: center;
     padding: 6px;
-    font-size: 1.4em;
+    font-size: 1.6em;
 }
 
 a:hover {
@@ -67,7 +67,7 @@ a svg {
 .navbar-bottom {
     display: none;
     width: 100%;
-    background-color: rgb(198, 188, 188);
+    background-color: #E8F9FF;
     position: fixed;
     bottom: 0;
     z-index: 100;
@@ -81,7 +81,7 @@ a svg {
 }
 
 .navbar-bottom a svg {
-    font-size: 1.6em;
+    font-size: 1.3em;
     color: #EA9D15;
 }
 
