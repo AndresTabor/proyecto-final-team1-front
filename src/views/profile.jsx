@@ -35,14 +35,7 @@ export const Profile = () => {
             setIsEditing(false);
             setError(null);
         }
-        // if (user.localization.length < 3) {
-        //     setError("El nombre tiene que tener como mínimo 3 caracteres.")
-        // }
-        // else {
-        //     actions.updateUser(user);
-        //     setIsEditing(false);
-        //     setError(null);
-        // }
+       
     };
 
 
@@ -70,7 +63,7 @@ export const Profile = () => {
 
     return (
         <div className="container-profile d-flex justify-content-center">
-            <div className="card mb-5 mt-5 w-50 p-5">
+            <div className="card mb-5 mt-5 row col-6 md-9 p-5">
                 <div className="row g-0">
                     <div className="col-md-4 position-abosulte">
                         <input ref={imputFile} onChange={handleUploadImage} type="file" accept="image/*" id="file" style={{ display: 'none' }} />
@@ -79,7 +72,7 @@ export const Profile = () => {
                         </button>
 
                         <img src={user.image ? user.image : "https://cdn-icons-png.flaticon.com/512/4794/4794936.png"} className="img-fluid rounded-start" alt="Foto" />
-                        {/* <p> className="card-title">email@email.com</p> */}
+                        
                     </div>
                     <div className="col-md-8 mt-4">
                         <div className="card-body">
