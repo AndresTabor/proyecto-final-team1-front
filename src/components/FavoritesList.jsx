@@ -8,7 +8,7 @@ const FavoritesList = ({favorites}) => {
         <h2 className="text-center mb-4">Mis Favoritos</h2>
         <div className="row gap-3 justify-content-center">
             {favorites.map(favorite => (
-                <div className="col-md-4 mb-4" key={favorite.id}>
+                <div className="col-md-4 mb-4" key={favorite?.id}>
                     <FavoriteCard favorite={favorite} />
                 </div>
             ))}

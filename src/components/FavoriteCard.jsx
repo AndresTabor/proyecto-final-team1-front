@@ -22,8 +22,8 @@ const FavoriteCard = ({favorite}) => {
             <p>{favorite?.email}</p>
         </div>
         <div className="d-flex flex-column">
-            <Link href="#">Ver perfil</Link>
-            <Link href="#">Contactame</Link>
+            <Link to={`/public-profile/${favorite.id}`}>Ver perfil</Link>
+            <Link to={`/chats/${favorite.id}`}>Contactame</Link>
 
         </div>
         <button className='border-0 bg-transparent text-danger favorite-button' onClick={handleClick}>

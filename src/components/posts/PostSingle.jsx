@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Context } from "../../store/AppContext";
 import { Card, Button } from "react-bootstrap";
 
@@ -16,7 +16,7 @@ const SinglePost = () => {
         return <div className="text-center mt-5">Cargando...</div>;
     }
 
-    const { profession_title, description, image_url, price_per_hour, location } = store.singlePost;
+    const { profession_title, description, image_url, price_per_hour, location , user} = store.singlePost;
 
     return (
         <div className="container d-flex justify-content-center mt-5">
@@ -36,8 +36,8 @@ const SinglePost = () => {
                         >
                             Volver atrás
                         </Button>
-                        <Button variant="secondary">Ver Perfil</Button>
-                        <Button variant="success">Contactar</Button>
+                        <Link to={`/public-profile/${user.id}`} variant="secondary" className="btn btn-secondary">Ver Perfil</Link>
+                        <Link to={`/chats/${user.id}`} variant="success" className="btn btn-success">Contactar</Link>
                     </div>
                 </Card.Body>
             </Card>

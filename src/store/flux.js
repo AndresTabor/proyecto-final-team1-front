@@ -318,12 +318,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFavorite: async (id) => {
 				const store = getStore();
 				try {
-					const resp = await fetch(`${url}/favorites/add/${id}`, {
+					const resp = await fetch(`${url}favorites/add`, {
 						method: "POST",
 						headers: {
-							"Authorization": `Bearer ${store.token}`
+							"Authorization": `Bearer ${store.token}`,
+							"content-type": "application/json"
                         },
-						body: JSON.stringify({"user_to_id": id})
+						body: JSON.stringify({"user_to_id": Number(id)})
 					});
 
 					if (!resp.ok) {
@@ -335,6 +336,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem('user', JSON.stringify(store.user));
 				} catch (error) {
 					console.error("Error adding favorite", error);
+				}
+			},
+			getFavorites: async () => {
+				const store = getStore();
+				try {
+					const resp = await fetch(`${url}favorites/my-favorites`,{
+						headers: {
+                            "Authorization": `Bearer ${store.token}`
+                        }						
+					}
+					)
+					if (!resp.ok) {
+						throw new Error(`Http error! status: ${resp.status}`);
+					}
+					const data = await resp.json();
+					console.log(data);
+					
+					setStore({ user: {...store.user, following: data } });
+				} catch (error) {
+					console.error(error);
 				}
 			},
 			sendMessage: async (senderId, receiverId, content) => {

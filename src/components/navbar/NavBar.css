@@ -30,7 +30,7 @@
     margin-right: 40px;
 }
 
-ul {
+.navbar-top ul {
     list-style-type: none;
     display: flex;
     padding: 0;
@@ -41,7 +41,7 @@ ul {
 }
 
 
-li {
+.navbar-top ul li {
     color: white;
 }
 
