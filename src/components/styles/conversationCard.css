@@ -1,0 +1,42 @@
+.btn-conversation{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    transition: ease-in-out 0.2s;
+}
+
+.btn-conversation  img{
+    width: 80px;
+}
+
+.conversation-info{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.conversation-info > div{
+    text-align: start;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.conversation-info  p{
+    font-size: 0.8rem;
+    color: #464646;
+}
+
+
+@media screen and (max-width: 500px) {
+    .btn-conversation{
+        flex-direction: column;
+    }
+
+    .conversation-info{
+        flex-direction: column;
+        align-items: center;
+    }
+}
