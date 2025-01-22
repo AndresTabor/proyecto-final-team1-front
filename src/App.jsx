@@ -11,6 +11,7 @@ import PostSingleView from "./views/Posts/PostSingleView";
 import { NavBar } from "./components/navbar/NavBar"
 import './App.css'
 import { Favorites } from './views/Favorites';
+import { Footer } from './components/Footer';
 import CreatePostView from './views/Posts/CreatePostView';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -35,6 +36,8 @@ function App() {
         <Route path="/create-post" element={<CreatePostView />} />
 
       </Routes>
+      <Footer />
+
     </BrowserRouter>
 
   )

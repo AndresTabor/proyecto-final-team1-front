@@ -12,7 +12,6 @@ const FavoritesList = ({favorites}) => {
                     <FavoriteCard favorite={favorite} />
                 </div>
             ))}
-            <FavoriteCard/>
             
         </div>
     </div>
@@ -25,7 +24,7 @@ FavoritesList.propTypes = {
     image: PropTypes.string,
     fullname: PropTypes.string,
     email: PropTypes.string,
-  })).isRequired,
+  })),
 };
 
 export default FavoritesList

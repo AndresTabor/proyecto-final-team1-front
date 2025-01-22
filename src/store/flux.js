@@ -1,10 +1,11 @@
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://stunning-carnival-pjqgxg94ppj294qv-3000.app.github.dev"
-	const url_posts = "https://stunning-carnival-pjqgxg94ppj294qv-3000.app.github.dev/posts"
+	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
+	const url_posts = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/posts"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
@@ -70,11 +71,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					localStorage.setItem('user', JSON.stringify(user));        
 					console.log(user, payload);
-					setStore ({error: null})
+					setStore ({error: null});
+					
+					
 
 				} catch (error) {
 					console.error("Error loading user", error);
-
+					throw error
 				}
 			},
 
