@@ -13,7 +13,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			posts: [],
 			singlePost: null,
-			error: null
+			error: null,
+			filters : {
+				profession_title :"",
+				location: '',
+        		min_price: '',
+        		max_price: '',
+        		latitude: null,
+        		longitude: null,
+        		page: 1,
+        		limit: 10
+			}
 		},
 		actions: {
 			isLogin: () => {
@@ -121,6 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				const store = getStore();
 				try {
+
 					const resp = await fetch(`${url}/users/profile`, {
 						method: "PUT",
 						headers: {
@@ -147,8 +158,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//  ---- POSTS endpoints ----
 			//GET all posts
 			fetchPosts: async () => {
+				const store = getStore();
+				const { profession_title, location, min_price, max_price, latitude, longitude, page, limit } = store.filters;
+
                 try {
-                    const response = await fetch(url_posts);
+
+					const query = new URLSearchParams({
+						profession_title,
+						location,
+						min_price,
+						max_price,
+						latitude,
+						longitude,
+						page,
+						limit
+					});
+							
+                    const response = await fetch(`${url_posts}/filter_posts?${query}`);
                     if (!response.ok) {
                         throw new Error('Error al obtener las publicaciones');
                     }
