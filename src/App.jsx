@@ -13,8 +13,6 @@ import './App.css'
 import { Favorites } from './views/Favorites';
 
 
-
-
 function App() {
 
   

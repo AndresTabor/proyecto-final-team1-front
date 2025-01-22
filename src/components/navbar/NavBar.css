@@ -46,23 +46,28 @@ li {
     color: white;
 }
 
-a {
+.active-link-top{
+    border-bottom: 3px solid #EA9D15; 
+    padding-bottom: 5px;
+}
+
+.navbar-top a{
     color: black;
     text-decoration: none;
     display: flex;
     align-items: center;
     padding: 2px;
-    font-size: 1.6em;
+    font-size: 1.4em;
 }
 
-a:hover {
-    transform: scale(1.1); 
+.navbar-top a:hover svg{
+    transform: scale(1.2); 
 }
 
 a svg {
     font-size: 1.8rem; 
     margin-right: 10px; 
-    color: #EA9D15;
+    color: #ea9d15;
 }
 
 .navbar-bottom {
@@ -71,19 +76,24 @@ a svg {
     background-color: #E8F9FF;
     position: fixed;
     bottom: 0;
+    left: 0;
     z-index: 100;
 }
 
 .navbar-bottom ul {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
     margin: 0;
+    padding: 5px;
 }
 
 .navbar-bottom a svg {
-    font-size: 1.3em;
+    font-size: 40px;
     color: #EA9D15;
+}
+
+.navbar-bottom a svg:hover{
+    color: black;
 }
 
 
