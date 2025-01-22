@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Context } from "../store/AppContext";
+import { Context } from "../../store/AppContext";
 import { Card, Button } from "react-bootstrap";
 
 const SinglePost = () => {
