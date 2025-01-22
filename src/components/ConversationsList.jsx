@@ -3,11 +3,12 @@
 import PropTypes from 'prop-types';
 import { ConversationsCard } from './ConversationsCard';
 import "./styles/conversationList.css";
+import { Timestamp } from 'firebase/firestore';
 
-const ConversationsList = ({mockConversations, selectChat, selectedChatId}) => {
+const ConversationsList = ({conversations, selectChat, selectedChatId}) => {
   return (
     <ul className='overflow-y-auto'>
-        {mockConversations.map((conversation) => (
+        {conversations.map((conversation) => (
         <li
             key={conversation.userId}
             style={{
@@ -24,11 +25,11 @@ const ConversationsList = ({mockConversations, selectChat, selectedChatId}) => {
   )
 };
 ConversationsList.propTypes = {
-  mockConversations: PropTypes.arrayOf(
+  conversations: PropTypes.arrayOf(
     PropTypes.shape({
       userId: PropTypes.number.isRequired,
       lastMessage: PropTypes.string.isRequired,
-      timestamp: PropTypes.instanceOf(Date).isRequired,
+      timestamp: PropTypes.instanceOf(Timestamp).isRequired,
     })
   ).isRequired,
   selectChat: PropTypes.func.isRequired,

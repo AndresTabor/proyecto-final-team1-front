@@ -1,27 +1,30 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Context } from "../store/AppContext";
 import useMessages from "../common/hooks/useMessage";
 import useConversations from "../common/hooks/useConversations";
 
-import { mockConversations } from "../common/mocks/conversations";
-import { mockMessages } from "../common/mocks/messages";
 import ConversationsList from "../components/ConversationsList";
 import MessagesList from "../components/MessagesList";
 import { BsFillSendFill } from "react-icons/bs";
 
 import "./styles/chat.css";
+import { useParams } from "react-router-dom";
 
 export const Chats = () => {
   const { store, actions } = useContext(Context);
   const [newMessage, setNewMessage] = useState("");
-
-  const id = 2;
-  const [selectedChatId, setSelectedChatId] = useState();
-  const [conversationsFiltered, setConversationsFiltered] =
-    useState(mockConversations);
-
-  // const conversations = useConversations(id);
-  // const messages = useMessages(id, selectedChatId);
+  const { id } = store.user
+  const { chatSelected } = useParams()
+ 
+  
+  
+  const [selectedChatId, setSelectedChatId] = useState(Number(chatSelected));
+  const conversations = useConversations(id);
+  const messages = useMessages(id, selectedChatId);
+  const [filterConversations, setfilterConversations] = useState("");
+  
+  
+  
 
   const handleSelectedChat = (chatId) => {
     setSelectedChatId(chatId);
@@ -34,13 +37,17 @@ export const Chats = () => {
       setNewMessage("");
     }
   };
+
+  const filteredConversations = useMemo(() => {
+    return filterConversations && filterConversations.length > 0 ? 
+    conversations.filter((conversation) =>
+      conversation?.fullname.toLowerCase().includes(filterConversations)
+    ) : conversations
+  }, [conversations, filterConversations]);
   
   const handleSearchConversation = (e) => {
-    const searchQuery = e.target.value.toLowerCase();
-    const filteredConversations = mockConversations.filter((conversation) =>
-      conversation.fullname.toLowerCase().includes(searchQuery)
-    );
-    setConversationsFiltered(filteredConversations);
+    setfilterConversations(e.target.value.toLowerCase());
+    
   };
 
   return (
@@ -55,7 +62,7 @@ export const Chats = () => {
           />
         </div>
         <ConversationsList
-          mockConversations={conversationsFiltered}
+          conversations={filteredConversations}
           selectChat={handleSelectedChat}
           selectedChatId={selectedChatId}
         />
@@ -64,7 +71,7 @@ export const Chats = () => {
         {selectedChatId ? (
           <>
             <MessagesList
-              messages={mockMessages}
+              messages={messages}
               userId={id}
               name={"Andres"}
             />

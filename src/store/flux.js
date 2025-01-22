@@ -232,11 +232,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			sendMessage: async (senderId, receiverId, content) => {
-				console.log("Sending message...");
-				
+				const senderName = getStore().user.fullname
 				try {
 				  await addDoc(collection(db, "messages"), {
 					senderId,
+					senderName,
 					receiverId,
 					content,
 					timestamp: serverTimestamp(),
@@ -244,6 +244,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.log("Message sent!");
 				} catch (error) {
 				  console.error("Error sending message: ", error);
+				}
+			},
+			getUserById: async ( userId ) => {
+				try {
+					const response = await fetch(url + `/users/` + userId);
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    return data
+                } catch (error) {
+					console.error("Error fetching user by id:", error);
 				}
 			}
 		}

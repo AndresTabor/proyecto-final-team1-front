@@ -21,6 +21,7 @@ const useConversations = (userId) => {
         if (!conversationMap[otherUser]) {
           conversationMap[otherUser] = {
             userId: otherUser,
+            fullname: data.senderName,
             lastMessage: data.content,
             timestamp: data.timestamp,
           };

@@ -1,9 +1,26 @@
 import PropTypes from "prop-types"
 import "./styles/conversationCard.css"
+import { Timestamp } from "firebase/firestore"
+import { Context } from "../store/AppContext"
+import { useContext, useEffect, useState } from "react"
 
 export const ConversationsCard = ({conversation, selectChat}) => {
+
+  const { actions } = useContext(Context)
+  const [ userData, setUserData] = useState({})
+
+  useEffect(() => {
+    
+    actions.getUserById(conversation.userId)
+    .then(response => setUserData(response))
+    .catch(err => console.log(err))
+    
+  }, [])
+  
   const formatDate = (timestamp) => {
-    const date = new Date(timestamp)
+    const milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6;
+    const date = new Date(milliseconds)
+  
     const day = date.getDate()
     const month = date.getMonth() + 1
     const year = date.getFullYear()
@@ -21,13 +38,13 @@ export const ConversationsCard = ({conversation, selectChat}) => {
   return (
     <button onClick={() => selectChat(conversation.userId)} className="btn-conversation">
       <div>
-        <img src="https://images.imagenmia.com/model_version/bbfea91410ef7994cfefde4a33e032f3aebf7b90dda683f7fa32ea2685d2e7bb/1723819204347-output.jpg" 
+        <img src={userData.image ? userData.image : "https://cdn-icons-png.flaticon.com/512/6858/6858504.png" }
           alt="profile" 
         />
       </div>
       <div className="conversation-info">
         <div>
-          <strong>{conversation.fullname}</strong>
+          <strong>{userData.fullname}</strong>
           <p>{conversation.lastMessage}</p>
         </div>
         <small>
@@ -40,9 +57,8 @@ export const ConversationsCard = ({conversation, selectChat}) => {
 ConversationsCard.propTypes = {
   conversation: PropTypes.shape({
     userId: PropTypes.number.isRequired,
-    fullname: PropTypes.string.isRequired,
     lastMessage: PropTypes.string.isRequired,
-    timestamp: PropTypes.instanceOf(Date).isRequired
+    timestamp: PropTypes.instanceOf(Timestamp).isRequired
   }).isRequired,
   selectChat: PropTypes.func.isRequired
 }

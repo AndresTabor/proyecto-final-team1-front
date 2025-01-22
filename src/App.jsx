@@ -28,7 +28,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/posts-list/:id" element={<PostSingleView />} />
         <Route path='/favorites' element = {<Favorites/>} />
-        <Route path='/chats' element = {<Chats/>} />
+        <Route path='/chats/:chatSelected?' element = {<Chats/>} />
         
       </Routes>
     </BrowserRouter>
