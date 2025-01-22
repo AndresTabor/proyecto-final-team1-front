@@ -3,13 +3,12 @@
     background-color: #E8F9FF;
     display: flex;
     align-items: center;
-    position: fixed;
+    position: sticky;
     left: 0;
     top: 0;
     z-index: 100;
     /* font-family: "M PLUS Rounded 1c"; */
     font-family: "Calistoga";
-    /* font-weight:bold; */
 }
 
 /* Logo */
