@@ -9,7 +9,8 @@ const PostsList = () => {
         profession_title: '',
         location: '',
         min_price: '',
-        max_price: ''
+        max_price: '',
+        page: 1
     });
 
     const handleFilterChange = (e) => {
@@ -24,6 +25,15 @@ const PostsList = () => {
         e.preventDefault();
         actions.setFilters(filters);  //actualizamos los filtros
         actions.fetchPosts(); //llamamos a la api
+    };
+
+    const handlePageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= store.filters.pagination.total_pages) {
+            setFilters((prevFilters) => ({
+                ...prevFilters,
+                page: newPage
+            }));
+        }
     };
 
     useEffect(() => {
@@ -88,6 +98,27 @@ const PostsList = () => {
                     <p>Cargando publicaciones...</p>
                 )}
             </div>
+
+            {/* paginacion */}
+            {store.filters.pagination && store.filters.pagination.total_pages > 1 && (
+                <div className="pagination-container">
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => handlePageChange(filters.page - 1)}
+                        disabled={filters.page === 1}
+                    >
+                        Anterior
+                    </button>
+                    <span>{`Página ${filters.page} de ${store.filters.pagination.total_pages}`}</span>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => handlePageChange(filters.page + 1)}
+                        disabled={filters.page === store.filters.pagination.total_pages}
+                    >
+                        Siguiente
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
