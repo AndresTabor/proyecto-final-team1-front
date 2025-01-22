@@ -1,16 +1,17 @@
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../config/firebase-config";
 
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
-	const url_posts = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev/posts"
+	const url = "http://localhost:3000/"
+	const url_posts = "http://localhost:3000/posts"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
 		store: {
-			user: [],
+			user: {},
 			token: null,
 			posts: [],
 			singlePost: null,
@@ -334,6 +335,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem('user', JSON.stringify(store.user));
 				} catch (error) {
 					console.error("Error adding favorite", error);
+				}
+			},
+			sendMessage: async (senderId, receiverId, content) => {
+				const senderName = getStore().user.fullname
+				try {
+				  await addDoc(collection(db, "messages"), {
+					senderId,
+					senderName,
+					receiverId,
+					content,
+					timestamp: serverTimestamp(),
+				  });
+				  console.log("Message sent!");
+				} catch (error) {
+				  console.error("Error sending message: ", error);
+				}
+			},
+			getUserById: async ( userId ) => {
+				try {
+					const response = await fetch(url + `/users/` + userId);
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    return data
+                } catch (error) {
+					console.error("Error fetching user by id:", error);
 				}
 			}
 		}
