@@ -5,8 +5,8 @@ import { db } from "../config/firebase-config";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "http://localhost:3000/"
-	const url_posts = "http://localhost:3000/posts"
+	const url = "https://musical-space-goldfish-x955x5wwjwqh6q7x-3000.app.github.dev"
+	const url_posts = "https://musical-space-goldfish-x955x5wwjwqh6q7x-3000.app.github.dev/posts"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
