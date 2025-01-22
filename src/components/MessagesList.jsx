@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types'
-import "./styles/MessagesList.css"
+import "./styles/messagesList.css"
 
 const MessagesList = ({messages, userId, name}) => {
   return (
