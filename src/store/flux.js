@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://expert-journey-7vr76wvw4j5ghwxxj-3000.app.github.dev"
+	const url = "https://musical-space-goldfish-x955x5wwjwqh6q7x-3000.app.github.dev"
+	const url_posts = "https://musical-space-goldfish-x955x5wwjwqh6q7x-3000.app.github.dev/posts"
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
 	return {
@@ -13,7 +14,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			posts: [],
 			singlePost: null,
-			error: null
+			error: null,
+			filters : {
+				profession_title :"",
+				location: '',
+        		min_price: '',
+        		max_price: '',
+        		latitude: null,
+        		longitude: null,
+        		page: 1,
+        		limit: 10
+			}
 		},
 		actions: {
 			isLogin: () => {
@@ -123,6 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				const store = getStore();
 				try {
+
 					const resp = await fetch(`${url}/users/profile`, {
 						method: "PUT",
 						headers: {
@@ -146,9 +158,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+			//  			------- POSTS ENDPOINTS -------
+
+			//GET ALL POSTS
 			fetchPosts: async () => {
+				const store = getStore();
+				const { profession_title, location, min_price, max_price, latitude, longitude, page, limit } = store.filters;
+
                 try {
-                    const response = await fetch(url + `/posts`);
+
+					const query = new URLSearchParams({
+						profession_title,
+						location,
+						min_price,
+						max_price,
+						latitude,
+						longitude,
+						page,
+						limit
+					});
+							
+                    const response = await fetch(`${url_posts}/filter_posts?${query}`);
                     if (!response.ok) {
                         throw new Error('Error al obtener las publicaciones');
                     }
@@ -163,9 +194,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
+			//GET 1 POST by ID
 			getSinglePost: async (id) => {
                 try {
-                    const response = await fetch(url + `/posts` + `/${id}`);
+                    const response = await fetch(`${url_posts}/${id}`);
                     if (!response.ok) {
                         throw new Error(`Error ${response.status}: ${response.statusText}`);
                     }
@@ -175,6 +207,68 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error fetching single post:", error);
                 }
             },
+
+			// PUT EDITAR POST
+			updatePost: async (id, updatedData) => {
+				//const token = localStorage.getItem("token");
+				try {
+					const response = await fetch(`${url_posts}/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							//Authorization: `${token}`
+						},
+						body: JSON.stringify(updatedData)
+					});
+					if (!response.ok) {
+						const errorData = await response.json();
+						throw new Error(errorData.error || "Error al actualizar el post");
+					}
+					const data = await response.json();
+					setStore({
+						posts: getStore().posts.map(post =>
+							post.id === id ? { ...post, ...data.data } : post
+						)
+					});
+					return { success: true, message: "Post actualizado correctamente" };
+				} catch (error) {
+					console.error("Error al actualizar el post:", error);
+					return { success: false, message: error.message };
+				}
+			},
+			
+			// CREATE POST
+			createPost: async (postData) => {
+				const store = getStore();
+				try {
+					const response = await fetch(url_posts, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							//Authorization: `Bearer ${store.token}` // si se usa token para autenticar
+						},
+						body: JSON.stringify(postData),
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						// actualizar la lista de posts en el store
+						const updatedPosts = [...store.posts, data.data];
+						setStore({ posts: updatedPosts });
+						return { success: true, message: "Post creado exitosamente" };
+					} else {
+						const errorData = await response.json();
+						return { success: false, message: errorData.error || "Error al crear el post" };
+					}
+				} catch (error) {
+					console.error("Error creando post:", error);
+					return { success: false, message: "Error de red o servidor" };
+				}
+			},
+			
+			
+
+
 			uploadImageProfile: async (file) => {
 				const store = getStore();
 				const actions = getActions();

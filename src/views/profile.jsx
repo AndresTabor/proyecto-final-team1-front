@@ -4,6 +4,8 @@ import { FaEdit } from "react-icons/fa";
 import './styles/profile.css';
 import moment from "moment";
 import { Link } from "react-router-dom";
+import PostListByUserId from "../components/posts/PostListByUserId";
+
 
 
 export const Profile = () => {
@@ -88,11 +90,11 @@ export const Profile = () => {
                                     {/* <input className="form-control mb-3" placeholder="Email" type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} /> */}
                                     <input className="form-control mb-3" placeholder="Localización" type="text" value={user.location} onChange={(e) => setUser({ ...user, location: e.target.value })} />
 
-                                    
-                                        {error && (<div className="alert-sm text-danger text-center" role="alert">{error}</div>)}
-                                        
-                                            
-                                    
+
+                                    {error && (<div className="alert-sm text-danger text-center" role="alert">{error}</div>)}
+
+
+
 
                                     <div className="text-end mt-5">
                                         <button onClick={() => setIsEditing(false)} type='submit' className="btn btn-outline-primary mx-2">CANCELAR</button>
@@ -121,8 +123,8 @@ export const Profile = () => {
                         </div>
                     </div>
                 </div>
+                <PostListByUserId />
             </div>
-
         </div>
 
 
