@@ -9,17 +9,17 @@ const FavoriteCard = ({favorite}) => {
 
     const handleClick = (e) => {
         e.preventDefault() 
-        actions.removeFavorite(favorite.id)        
+        actions.removeFavorite(favorite?.id)        
     }
 
   return (
     <div className="card-favorite">
         <div className="img">
-            <img src={favorite.image} alt="foto" />
+            <img src={favorite?.image} alt="foto" />
         </div>
         <div className="info">
-            <span>{favorite.fullname}</span>
-            <p>{favorite.email}</p>
+            <span>{favorite?.fullname}</span>
+            <p>{favorite?.email}</p>
         </div>
         <div className="d-flex flex-column">
             <Link href="#">Ver perfil</Link>
@@ -39,7 +39,7 @@ FavoriteCard.propTypes = {
     fullname: PropTypes.string,
     email: PropTypes.string,
     id: PropTypes.number
-  }).isRequired
+  }),
 };
 
 export default FavoriteCard

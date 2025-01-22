@@ -39,3 +39,22 @@ input {
   .alert-sm {
     font-size: 12px;
   }
+
+  .container-profile {
+    font-family:M PLUS Rounded 1c;
+  }
+
+  .letra-perfil {
+    color: #6A80B9
+  }
+
+  .foot {
+    color: rgb(7, 7, 7);
+    font-size: 12px;
+    font-weight: lighter;
+    background-color: #aaa8a8;
+    padding: 10px;
+    width: 100%; 
+    margin: 0 auto;
+    text-align: center; 
+  }

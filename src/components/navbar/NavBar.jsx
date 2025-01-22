@@ -1,55 +1,109 @@
-import { CiGrid41 } from "react-icons/ci";
-import {Link} from "react-router-dom"
-import "./NavBar.css"
-import { FaHome } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
-import { FaRegMessage } from "react-icons/fa6";
-import { CgProfile } from "react-icons/cg";
-import { IoMdLogIn } from "react-icons/io";
+import "./NavBar.css";
+import { Link, NavLink } from "react-router-dom";
+import { FaHome, FaHeart, FaComments, FaUserCircle } from "react-icons/fa";
+import { GrLogin } from "react-icons/gr";
+import { useContext } from "react";
+import { Context } from "../../store/AppContext";
+
+const logo = "/src/assets/images/logo-wazoo.png";
 
 export const NavBar = () => {
+    const { store } = useContext(Context);
+
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-            <div className="container-fluid">
-                <Link className="logo" to="/">
-                    <img
-                        src="/src/assets/logo-wazoo.png"
-                    />
-                </Link>
-                {/* menu toggle */}
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
+        <>
+            {/* navbar de arriba */}
+            <nav className="navbar-top">
+                <ul>
+                    <li className="logo-letras">
+                        <Link to="/">
+                            <img src={logo} alt="Logo" />
+                        </Link>
+                    </li>
 
-                {/* menu navegacion */}
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav d-flex justify-content-evenly align-items-center w-100 gap-3">
-                        <Link to = "/" className="inicio d-flex align-item-center gap-2">
-                            <FaHome className="icons"/>
-                            <h3>Inicio</h3>
-                        </Link>
-                        <Link to = "/favorites" className="favoritos d-flex align-item-center gap-2">
-                            <FaHeart className="icons"/>
-                            <h3>Favoritos</h3>
-                        </Link>
-                        <Link to = "/chats" className="chats d-flex align-item-center gap-2">
-                            <FaRegMessage className="icons"/>
-                            <h3>Chats</h3>
-                        </Link>
-                        <Link to = "/profile" className="perfil d-flex align-item-center gap-2">
-                            <CgProfile className="icons"/>
-                            <h3>Perfil</h3>
-                        </Link>
-                        <Link to = "/login" className="perfil d-flex align-item-center gap-2">
-                            <IoMdLogIn className="icons"/>
-                            <h3>Ingresar</h3>
-                        </Link>
-                    </ul>
-                    
-                </div>
-            </div>
-        </nav>
+                    <div className="left-items">
+                        <li>
+                            <NavLink
+                                to="/"
+                                className={({ isActive }) => (isActive ? "active-link-top" : "")}
+                            >
+                                <FaHome /> Inicio
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/favorites"
+                                className={({ isActive }) => (isActive ? "active-link-top" : "")}
+                            >
+                                <FaHeart /> Favoritos
+                            </NavLink>
+                        </li>
+                    </div>
 
-    )
-}
+                    <div className="right-items">
+                        <li>
+                            <NavLink
+                                to="/chats"
+                                className={({ isActive }) => (isActive ? "active-link-top" : "")}
+                            >
+                                <FaComments /> Chats
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to={store.user && store.user.id ? "/profile" : "/login"}
+                                className={({ isActive }) => (isActive ? "active-link" : "")}
+                            >
+                                {store.user && store.user.id ? (
+                                    <span>
+                                        <FaUserCircle />
+                                        Mi Perfil
+                                    </span>
+                                ) : (
+                                    <span>
+                                        <GrLogin />
+                                        Ingresar
+                                    </span>
+                                )}
+                            </NavLink>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+
+            {/* navbar de abajo */}
+            <nav className="navbar-bottom">
+                <ul>
+                    <NavLink to="/">
+                        <a>
+                            <FaHome />
+                        </a>
+                    </NavLink >
+                    <NavLink to="/favorites">
+                        <a>
+                            <FaHeart />
+                        </a>
+                    </NavLink >
+                    <NavLink to="/chats">
+                        <a>
+                            <FaComments />
+                        </a>
+                    </NavLink >
+                    <NavLink
+                        to={store.user && store.user.id ? "/profile" : "/login"}
+                    >
+                        {store.user && store.user.id ? (
+                            <span>
+                                <FaUserCircle />
+                            </span>
+                        ) : (
+                            <span>
+                                <GrLogin />
+                            </span>
+                        )}
+                    </NavLink >
+                </ul>
+            </nav>
+        </>
+    );
+};

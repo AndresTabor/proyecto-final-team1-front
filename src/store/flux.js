@@ -1,4 +1,5 @@
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const getState = ({ getStore, getActions, setStore }) => {
 
@@ -13,7 +14,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			posts: [],
 			singlePost: null,
-			error: null
+			error: null,
+			filters : {
+				profession_title :"",
+				location: '',
+        		min_price: '',
+        		max_price: '',
+        		latitude: null,
+        		longitude: null,
+        		page: 1,
+        		limit: 10
+			}
 		},
 		actions: {
 			isLogin: () => {
@@ -60,11 +71,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					localStorage.setItem('user', JSON.stringify(user));        
 					console.log(user, payload);
-					setStore ({error: null})
+					setStore ({error: null});
+					
+					
 
 				} catch (error) {
 					console.error("Error loading user", error);
-
+					throw error
 				}
 			},
 
@@ -121,6 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 				const store = getStore();
 				try {
+
 					const resp = await fetch(`${url}/users/profile`, {
 						method: "PUT",
 						headers: {
@@ -144,11 +158,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			//  ---- POSTS endpoints ----
-			//GET all posts
+
+			//  			------- POSTS ENDPOINTS -------
+
+			//GET ALL POSTS
 			fetchPosts: async () => {
+				const store = getStore();
+				const { profession_title, location, min_price, max_price, latitude, longitude, page, limit } = store.filters;
+
                 try {
-                    const response = await fetch(url_posts);
+
+					const query = new URLSearchParams({
+						profession_title,
+						location,
+						min_price,
+						max_price,
+						latitude,
+						longitude,
+						page,
+						limit
+					});
+							
+                    const response = await fetch(`${url_posts}/filter_posts?${query}`);
                     if (!response.ok) {
                         throw new Error('Error al obtener las publicaciones');
                     }
@@ -162,7 +193,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error al hacer la petición:', error);
                 }
             },
-			//GET 1 post por id
+
+			//GET 1 POST by ID
 			getSinglePost: async (id) => {
                 try {
                     const response = await fetch(`${url_posts}/${id}`);
@@ -175,7 +207,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error fetching single post:", error);
                 }
             },
-			// PUT editar post 
+
+			// PUT EDITAR POST
 			updatePost: async (id, updatedData) => {
 				//const token = localStorage.getItem("token");
 				try {
@@ -203,6 +236,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return { success: false, message: error.message };
 				}
 			},
+			
+			// CREATE POST
+			createPost: async (postData) => {
+				const store = getStore();
+				try {
+					const response = await fetch(url_posts, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							//Authorization: `Bearer ${store.token}` // si se usa token para autenticar
+						},
+						body: JSON.stringify(postData),
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						// actualizar la lista de posts en el store
+						const updatedPosts = [...store.posts, data.data];
+						setStore({ posts: updatedPosts });
+						return { success: true, message: "Post creado exitosamente" };
+					} else {
+						const errorData = await response.json();
+						return { success: false, message: errorData.error || "Error al crear el post" };
+					}
+				} catch (error) {
+					console.error("Error creando post:", error);
+					return { success: false, message: "Error de red o servidor" };
+				}
+			},
+			
 			
 
 
