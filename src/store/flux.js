@@ -210,47 +210,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//GET 1 POST by ID
 			getSinglePost: async (id) => {
-				try {
-					const response = await fetch(`${url_posts}/${id}`);
-					if (!response.ok) {
-						throw new Error(`Error ${response.status}: ${response.statusText}`);
-					}
-					const data = await response.json();
-					setStore({ singlePost: data }); // se almacena en la store
-				} catch (error) {
-					console.error("Error fetching single post:", error);
-				}
-			},
-
-			// PUT EDITAR POST
-			updatePost: async (id, updatedData) => {
-				//const token = localStorage.getItem("token");
-				try {
-					const response = await fetch(`${url_posts}/${id}`, {
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json",
-							//Authorization: `${token}`
-						},
-						body: JSON.stringify(updatedData)
-					});
-					if (!response.ok) {
-						const errorData = await response.json();
-						throw new Error(errorData.error || "Error al actualizar el post");
-					}
-					const data = await response.json();
-					setStore({
-						posts: getStore().posts.map(post =>
-							post.id === id ? { ...post, ...data.data } : post
-						)
-					});
-					return { success: true, message: "Post actualizado correctamente" };
-				} catch (error) {
-					console.error("Error al actualizar el post:", error);
-					return { success: false, message: error.message };
-				}
-			},
-
+                try {
+                    const response = await fetch(`${url_posts}/${id}`);
+                    if (!response.ok) {
+                        throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    setStore({ singlePost: data }); // se almacena en la store
+                } catch (error) {
+                    console.error("Error fetching single post:", error);
+                }
+            },
+			
 			// CREATE POST
 			createPost: async (postData) => {
 				const store = getStore();
@@ -280,7 +251,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
+			// EDIT POST
+			editPost: async (id, postData) => {
+				try {
+					const response = await fetch(`${url_posts}/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(postData)
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						const store = getStore();
+			
+						// Actualizar el post en la store
+						const updatedPosts = store.posts.map(post =>
+							post.id === id ? { ...post, ...postData } : post
+						);
+			
+						setStore({ posts: updatedPosts, singlePost: data.data });
+						return { success: true, message: "Post actualizado exitosamente" };
+					} else {
+						const errorData = await response.json();
+						return { success: false, message: errorData.error || "Error al actualizar el post" };
+					}
+				} catch (error) {
+					console.error("Error actualizando el post:", error);
+					return { success: false, message: "Error de red o servidor" };
+				}
+			},
+			fetchPostById: async (id) => {
+				try {
+					const response = await fetch(`${url_posts}/${id}`);
+					if (!response.ok) {
+						throw new Error(`Error ${response.status}: ${response.statusText}`);
+					}
+					const data = await response.json();
+					setStore({ singlePost: data });
+					return data;
+				} catch (error) {
+					console.error("Error fetching single post:", error);
+					return null;
+				}
+			},			
+			
+			
+			
+			
 
 
 			uploadImageProfile: async (file) => {
