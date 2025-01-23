@@ -16,22 +16,27 @@ const EditPostForm = () => {
         location: ""
     });
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchPost = async () => {
-            const post = await actions.fetchPostById(id);
+            const post = await actions.fetchPostById(id); 
             if (post) {
                 setFormData({
-                    profession_title: post.profession_title,
-                    description: post.description,
-                    price_per_hour: post.price_per_hour,
-                    experience: post.experience,
-                    image_url: post.image_url,
-                    location: post.location
+                    profession_title: post.profession_title || "",
+                    description: post.description || "",
+                    price_per_hour: post.price_per_hour || "",
+                    experience: post.experience || "",
+                    image_url: post.image_url || "",
+                    location: post.location || ""
                 });
+                setLoading(false);
+            } else {
+                navigate("/"); 
             }
         };
         fetchPost();
-    }, [id, actions]);
+    }, [id, actions, navigate]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,11 +44,15 @@ const EditPostForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const success = await actions.editPost(id, formData);
+        const success = await actions.editPost(id, formData); 
         if (success) {
             navigate("/");
         }
     };
+
+    if (loading) {
+        return <div className="text-center mt-5">Cargando...</div>;
+    }
 
     return (
         <div className="container mt-5">

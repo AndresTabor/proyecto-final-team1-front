@@ -5,6 +5,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const PostListByUserId = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+    const { pathname } = useLocation(); 
 
     useEffect(() => {
         actions.fetchPosts();
