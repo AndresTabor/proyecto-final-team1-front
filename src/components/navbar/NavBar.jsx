@@ -1,5 +1,5 @@
 import "./NavBar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaHome, FaHeart, FaComments, FaUserCircle } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { GrLogin } from "react-icons/gr";
@@ -8,7 +8,16 @@ import { Context } from "../../store/AppContext";
 import logo from "/src/assets/images/logo-wazoo.png";
 
 export const NavBar = () => {
-    const { store } = useContext(Context);
+    const navigate = useNavigate()
+
+    const { store, actions } = useContext(Context);
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        actions.logout()
+        .then(() => navigate("/") )
+        .catch(e => console.error(e));
+    }
 
     return (
         <>
@@ -44,7 +53,7 @@ export const NavBar = () => {
                         {store.user && store.user.id ? "" : <li><NavLink to= "/register"><button className="register-button">Registrarse</button></NavLink></li>}
                         {store.user && store.user.id ? <li><NavLink to = "/chats" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaComments />Chats</NavLink></li> : ""}
                         {store.user && store.user.id ? <li><NavLink to = "/profile" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaUserCircle />Perfil</NavLink></li> : ""}
-                        {store.user && store.user.id ? <li><NavLink><BiLogOut />Cerrar Sesion</NavLink></li> : ""}
+                        {store.user && store.user.id ? <li><NavLink onClick={handleLogout}><BiLogOut />Cerrar Sesion</NavLink></li> : ""}
 
                     </div>
                 </ul>

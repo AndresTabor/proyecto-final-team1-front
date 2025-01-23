@@ -73,8 +73,7 @@ export const Login = () => {
                     }
                 </div>
                 <div className="d-grid gap-2 col-3 mx-auto">
-                    <button type='submit' className="btn btn-outline-primary">INGRESAR</button>
-                    <button type='submit' className="btn btn-outline-primary" onClick={handleLogout}>CERRAR SESIÓN</button>
+                    <button type='submit' className="btn btn-outline-primary">INGRESAR</button>                    
                 </div>
                 <div className="text-end mt-4">
                     <p className="text-center">¿No tienes cuenta? Regístrate</p>

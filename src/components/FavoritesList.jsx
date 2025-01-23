@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 
 const FavoritesList = ({favorites}) => {
+  console.log(favorites);
+  
   return (
     <div className="container my-5">
         <h2 className="text-center mb-4">Mis Favoritos</h2>

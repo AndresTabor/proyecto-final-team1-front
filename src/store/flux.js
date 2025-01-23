@@ -331,7 +331,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFavorite: async (id) => {
 				const store = getStore();
 				try {
-					const resp = await fetch(`${url}favorites/add`, {
+					const resp = await fetch(`${url}/favorites/add`, {
 						method: "POST",
 						headers: {
 							"Authorization": `Bearer ${store.token}`,
@@ -354,7 +354,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getFavorites: async () => {
 				const store = getStore();
 				try {
-					const resp = await fetch(`${url}favorites/my-favorites`, {
+					const resp = await fetch(`${url}/favorites/my-favorites`, {
 						headers: {
 							"Authorization": `Bearer ${store.token}`
 						}
