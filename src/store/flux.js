@@ -115,15 +115,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const store = getStore();
 				try {
-					const resp = await fetch(`${url}/users/logout`, {
-						method: "DELETE",
-						headers: {
-							"Authorization": `Bearer ${store.token}`
-						}
-					});
-					if (!resp.ok) {
-						throw new Error(`Http error! status: ${resp.status}`);
-					}
+					// const resp = await fetch(`${url}/users/logout`, {
+					// 	method: "DELETE",
+					// 	headers: {
+					// 		"Authorization": `Bearer ${store.token}`
+					// 	}
+					// });
+					// if (!resp.ok) {
+					// 	throw new Error(`Http error! status: ${resp.status}`);
+					// }
 					setStore({ token: null, user: [] })
 					localStorage.removeItem('token');
 					localStorage.removeItem('user');
