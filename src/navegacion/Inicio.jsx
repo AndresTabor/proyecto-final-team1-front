@@ -5,7 +5,6 @@ import PostsList from '../components/posts/PostsList'; // Ajusta la ruta según 
 export const Inicio = () => {
     return(
         <div className="posts-view">
-            <h1 className="text-center mt-4">Listado de Publicaciones</h1>
             <PostsList />
         </div>
     )

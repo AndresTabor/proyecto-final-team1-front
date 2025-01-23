@@ -13,6 +13,7 @@ const PostsList = () => {
         page: 1
     });
 
+    // entrada controlada
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         setFilters({
@@ -22,24 +23,23 @@ const PostsList = () => {
         console.log(name,value)
     };
 
+    // cuando hacemos click al form
     const handleSearch = (e) => {
         e.preventDefault();
-        actions.setFilters(filters);  //actualizamos los filtros
-        actions.fetchPosts(); //llamamos a la api
+        actions.fetchPosts(filters); //llamamos a la api
     };
 
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= store.filters.pagination.total_pages) {
-            setFilters((prevFilters) => ({
-                ...prevFilters,
-                page: newPage
-            }));
+            const updatedFilters = { ...filters, page: newPage };
+            setFilters(updatedFilters);
+            actions.fetchPosts(updatedFilters); // envio los nuevos filtros con la página actualizada
         }
     };
 
     useEffect(() => {
         actions.fetchPosts();
-    }, [filters, store.filters.page, store.filters.limit]);
+    }, [store.filters.page, store.filters.limit]);
 
     return (
         <div className="container mt-5">

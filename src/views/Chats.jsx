@@ -23,8 +23,6 @@ export const Chats = () => {
   const messages = useMessages(id, selectedChatId);
   const [filterConversations, setfilterConversations] = useState("");
   
-  
-  
 
   const handleSelectedChat = (chatId) => {
     setSelectedChatId(chatId);
