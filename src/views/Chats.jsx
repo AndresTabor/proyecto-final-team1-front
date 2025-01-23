@@ -17,7 +17,6 @@ export const Chats = () => {
   const { chatSelected } = useParams()
  
   
-  
   const [selectedChatId, setSelectedChatId] = useState(Number(chatSelected));
   const conversations = useConversations(id);
   const messages = useMessages(id, selectedChatId);
