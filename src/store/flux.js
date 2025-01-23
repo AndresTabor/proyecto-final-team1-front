@@ -5,7 +5,7 @@ import { db } from "../config/firebase-config";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "http://localhost:3000"
+	const url = "https://musical-space-goldfish-x955x5wwjwqh6q7x-3000.app.github.dev"
 	const url_posts = `${url}/posts`
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
@@ -295,7 +295,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error fetching single post:", error);
 					return null;
 				}
-			},			
+			},
+
+			// DELETE POST
+			deletePost: async (id) => {
+				const store = getStore();
+				try {
+					const response = await fetch(`${url_posts}/${id}`, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							// Authorization: `Bearer ${store.token}`
+						}
+					});
+					if (response.ok) {
+						const updatedPosts = store.posts.filter(post => post.id !== id);
+						setStore({ posts: updatedPosts });
+						return { success: true, message: "Post eliminado exitosamente" };
+					} else {
+						const errorData = await response.json();
+						return { success: false, message: errorData.error || "Error al eliminar el post" };
+					}
+				} catch (error) {
+					console.error("Error eliminando el post:", error);
+					return { success: false, message: "Error de red o servidor" };
+				}
+			},
+
 			
 			uploadImageProfile: async (file) => {
 				const store = getStore();
