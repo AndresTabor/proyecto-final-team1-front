@@ -1,0 +1,16 @@
+.btn-edit-image{
+    display: flex;
+    position: relative;
+    padding: 6px;
+    top: 160px;
+    left: 57px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    color: #515d78;
+    border: #515d78 solid 4px;
+    transition: ease-in-out 0.2s;
+}
+
+.btn-edit-image:hover{
+    transform: scale(1.1);
+}
