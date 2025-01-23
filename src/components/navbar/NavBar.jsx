@@ -1,18 +1,18 @@
 import "./NavBar.css";
 import { Link, NavLink } from "react-router-dom";
 import { FaHome, FaHeart, FaComments, FaUserCircle } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
 import { GrLogin } from "react-icons/gr";
 import { useContext } from "react";
 import { Context } from "../../store/AppContext";
-
-const logo = "/src/assets/images/logo-wazoo.png";
+import logo from "/src/assets/images/logo-wazoo.png";
 
 export const NavBar = () => {
     const { store } = useContext(Context);
 
     return (
         <>
-            {/* navbar de arriba */}
+            {/* Navbar de arriba */}
             <nav className="navbar-top">
                 <ul>
                     <li className="logo-letras">
@@ -20,7 +20,6 @@ export const NavBar = () => {
                             <img src={logo} alt="Logo" />
                         </Link>
                     </li>
-
                     <div className="left-items">
                         <li>
                             <NavLink
@@ -35,73 +34,55 @@ export const NavBar = () => {
                                 to="/favorites"
                                 className={({ isActive }) => (isActive ? "active-link-top" : "")}
                             >
-                                <FaHeart /> Favoritos
+                                {store.user && store.user.id ? <span><FaHeart />Favoritos</span> : ""}
                             </NavLink>
                         </li>
                     </div>
-
                     <div className="right-items">
                         <li>
                             <NavLink
                                 to="/chats"
                                 className={({ isActive }) => (isActive ? "active-link-top" : "")}
                             >
-                                <FaComments /> Chats
+                                {store.user && store.user.id ? <span><FaComments />Chats</span> : ""}
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink
-                                to={store.user && store.user.id ? "/profile" : "/login"}
-                                className={({ isActive }) => (isActive ? "active-link" : "")}
-                            >
-                                {store.user && store.user.id ? (
-                                    <span>
-                                        <FaUserCircle />
-                                        Mi Perfil
-                                    </span>
-                                ) : (
-                                    <span>
-                                        <GrLogin />
-                                        Ingresar
-                                    </span>
-                                )}
-                            </NavLink>
-                        </li>
+                        {store.user && store.user.id ? "" : <li><NavLink ><button>Iniciar Sesion</button></NavLink></li>}
+                        {store.user && store.user.id ? "" : <li><NavLink><button className="register-button">Registrarse</button></NavLink></li>}
+                        {store.user && store.user.id ? <li><NavLink to = "/chats" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaComments />Chats</NavLink></li> : ""}
+                        {store.user && store.user.id ? <li><NavLink to = "/profile" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaUserCircle />Perfil</NavLink></li> : ""}
+                        {store.user && store.user.id ? <li><NavLink><BiLogOut />Cerrar Sesion</NavLink></li> : ""}
+
                     </div>
                 </ul>
             </nav>
 
-            {/* navbar de abajo */}
+            {/* Navbar de abajo */}
             <nav className="navbar-bottom">
                 <ul>
-                    <NavLink to="/">
-                        <a>
+                    <li>
+                        <NavLink to="/" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
                             <FaHome />
-                        </a>
-                    </NavLink >
-                    <NavLink to="/favorites">
-                        <a>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/favorites" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
                             <FaHeart />
-                        </a>
-                    </NavLink >
-                    <NavLink to="/chats">
-                        <a>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/chats" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
                             <FaComments />
-                        </a>
-                    </NavLink >
-                    <NavLink
-                        to={store.user && store.user.id ? "/profile" : "/login"}
-                    >
-                        {store.user && store.user.id ? (
-                            <span>
-                                <FaUserCircle />
-                            </span>
-                        ) : (
-                            <span>
-                                <GrLogin />
-                            </span>
-                        )}
-                    </NavLink >
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to={store.user && store.user.id ? "/profile" : "/login"}
+                            className={({ isActive }) => (isActive ? "active-link-bottom" : "")}
+                        >
+                            {store.user && store.user.id ? <FaUserCircle /> : <GrLogin />}
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </>
