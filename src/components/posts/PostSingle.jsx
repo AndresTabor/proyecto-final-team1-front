@@ -36,8 +36,16 @@ const SinglePost = () => {
                         >
                             Volver atrás
                         </Button>
-                        <Link to={`/public-profile/${user.id}`} variant="secondary" className="btn btn-secondary">Ver Perfil</Link>
-                        <Link to={`/chats/${user.id}`} variant="success" className="btn btn-success">Contactar</Link>
+                        {
+                            store.user.id !== user.id &&
+                            <Link to={`/public-profile/${user.id}`} variant="secondary" className="btn btn-secondary">Ver Perfil</Link>
+                        }
+                        {
+                            store.user.id !== user.id
+                            ? <Link to={`/chats/${user.id}`} variant="success" className="btn btn-success">Contactar</Link>
+                            : <Link to={`/edit-post/${id}`} variant="success" className="btn btn-success">Editar</Link>
+                        }
+                        
                     </div>
                 </Card.Body>
             </Card>

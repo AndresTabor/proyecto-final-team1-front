@@ -10,7 +10,7 @@ const PostsList = () => {
         location: '',
         min_price: '',
         max_price: '',
-        page: 1
+        page: 1,
     });
 
     // entrada controlada
@@ -38,7 +38,7 @@ const PostsList = () => {
     };
 
     useEffect(() => {
-        actions.fetchPosts();
+        actions.fetchPosts(filters);
     }, [store.filters.page, store.filters.limit]);
 
     return (

@@ -5,7 +5,7 @@ import { db } from "../config/firebase-config";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "https://supreme-guide-q7g9w96jpvgf96g5-3000.app.github.dev"
+	const url = "http://localhost:3000"
 	const url_posts = `${url}/posts`
 	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
 
@@ -164,23 +164,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//GET ALL POSTS
 			fetchPosts: async (filters) => {
+				console.log(filters);
 				const store = getStore();
-				const { profession_title, location, min_price, max_price, latitude, longitude, page, limit } = filters;
+				// const { profession_title, location, min_price, max_price, latitude, longitude, page, limit } = filters;
+				const { profession_title,location,min_price,max_price,page } = filters;
 
 				try {
 
+					// const query = new URLSearchParams({
+					// 	profession_title,
+					// 	location,
+					// 	min_price,
+					// 	max_price,
+					// 	latitude: latitude || "",
+					// 	longitude: longitude || "",
+					// 	page,
+					// 	limit
+					// });
 					const query = new URLSearchParams({
 						profession_title,
 						location,
 						min_price,
 						max_price,
-						latitude: latitude || "",
-						longitude: longitude || "",
-						page,
-						limit
+						page
 					});
 
-					const response = await fetch(`${url_posts}/filter_posts?${query}`);
+					const response = await fetch(`${url_posts}/filter_posts/?${query}`);
 					if (!response.ok) {
 						throw new Error('Error al obtener las publicaciones');
 					}
