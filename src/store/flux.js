@@ -5,10 +5,10 @@ import { db } from "../config/firebase-config";
 const getState = ({ getStore, getActions, setStore }) => {
 
 
-	const url = "http://localhost:3000"
+	const url = import.meta.env.VITE_URL;
 	const url_posts = `${url}/posts`
-	const cloudUrl = 'https://api.cloudinary.com/v1_1/dzw2kegzu/upload';
-
+	const cloudUrl = import.meta.env.VITE_CLOUD_URL;
+	
 	return {
 		store: {
 			user: {},
