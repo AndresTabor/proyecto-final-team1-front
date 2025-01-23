@@ -6,9 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 	
-	const url = import.meta.env.VITE_URL;
+	const url = "https://flask-rest-hello-wtzk.onrender.com";
 	const url_posts = `${url}/posts`
-	const cloudUrl = import.meta.env.VITE_CLOUD_URL;
+	const cloudUrl = "https://api.cloudinary.com/v1_1/dzw2kegzu/upload";
 	
 	return {
 		store: {
