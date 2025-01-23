@@ -149,7 +149,7 @@ const EditPostForm = () => {
                                     />
                                 </div>
                                 <div className="d-flex justify-content-end">
-                                    <button type="button" className="btn btn-secondary me-2" onClick={() => navigate("/my-posts")}>
+                                    <button type="button" className="btn btn-secondary me-2" onClick={() => navigate("/profile")}>
                                         Cancelar
                                     </button>
                                     <button type="submit" className="btn btn-primary">

@@ -9,7 +9,7 @@ const PostListByUserId = () => {
     const { pathname } = useLocation(); 
 
     useEffect(() => {
-        actions.fetchPosts();
+        actions.fetchPosts(store.filters);
     }, []);
 
     const userPosts = store.posts?.filter((post) => post.user.id === store.user.id) || [];

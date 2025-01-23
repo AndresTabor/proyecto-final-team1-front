@@ -39,16 +39,9 @@ export const NavBar = () => {
                         </li>
                     </div>
                     <div className="right-items">
-                        <li>
-                            <NavLink
-                                to="/chats"
-                                className={({ isActive }) => (isActive ? "active-link-top" : "")}
-                            >
-                                {store.user && store.user.id ? <span><FaComments />Chats</span> : ""}
-                            </NavLink>
-                        </li>
-                        {store.user && store.user.id ? "" : <li><NavLink ><button>Iniciar Sesion</button></NavLink></li>}
-                        {store.user && store.user.id ? "" : <li><NavLink><button className="register-button">Registrarse</button></NavLink></li>}
+
+                        {store.user && store.user.id ? "" : <li><NavLink to="/login" ><button>Iniciar Sesion</button></NavLink></li>}
+                        {store.user && store.user.id ? "" : <li><NavLink to= "/register"><button className="register-button">Registrarse</button></NavLink></li>}
                         {store.user && store.user.id ? <li><NavLink to = "/chats" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaComments />Chats</NavLink></li> : ""}
                         {store.user && store.user.id ? <li><NavLink to = "/profile" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaUserCircle />Perfil</NavLink></li> : ""}
                         {store.user && store.user.id ? <li><NavLink><BiLogOut />Cerrar Sesion</NavLink></li> : ""}
