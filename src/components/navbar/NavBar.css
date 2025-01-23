@@ -7,14 +7,11 @@
     left: 0;
     top: 0;
     z-index: 100;
-    /* font-family: "M PLUS Rounded 1c"; */
     font-family: "Calistoga";
 }
 
-/* Logo */
 .logo-letras img {
-    width: 9em; 
-    padding: 2px;
+    width: 8em;
 }
 
 .left-items {
@@ -27,7 +24,7 @@
     display: flex;
     gap: 15px;
     margin-left: auto; 
-    margin-right: 40px;
+    margin-right: 10px;
 }
 
 .navbar-top ul {
@@ -56,12 +53,14 @@
     display: flex;
     align-items: center;
     padding: 2px;
-    font-size: 1.4em;
+    font-size: 1.5em;
 }
 
 .navbar-top a:hover svg{
     transform: scale(1.2); 
+    transition: all 0.3s ease;
 }
+
 
 a svg {
     font-size: 1.8rem; 
@@ -77,6 +76,7 @@ a svg {
     bottom: 0;
     left: 0;
     z-index: 100;
+    padding: 5px;
 }
 
 .navbar-bottom ul {
@@ -91,8 +91,36 @@ a svg {
     color: #EA9D15;
 }
 
-.navbar-bottom a svg:hover{
-    color: black;
+.active-link-bottom svg{
+    color: black !important;
+    transform: scale(1.2);
+}
+
+button {
+    border-radius: 25px;
+    padding: 5px 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    background-color: #edae41;
+}
+
+button:hover {
+    background-color: #e39d24; 
+    color: rgb(255, 255, 255); 
+    transform: scale(1.05);
+}
+
+.register-button {
+    background-color: #39aa54;
+    color: white;
+}
+
+.register-button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 

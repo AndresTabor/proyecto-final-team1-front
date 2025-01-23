@@ -17,9 +17,6 @@ import './App.css'
 import EditPostForm from './components/posts/EditPostForm';
 import { PublicProfile } from './views/PublicProfile';
 
-
-
-
 function App() {
 
 

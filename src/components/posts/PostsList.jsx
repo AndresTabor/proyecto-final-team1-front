@@ -19,6 +19,7 @@ const PostsList = () => {
             ...filters,
             [name]: value
         });
+        console.log(name,value)
     };
 
     const handleSearch = (e) => {
