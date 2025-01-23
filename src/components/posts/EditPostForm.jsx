@@ -57,7 +57,7 @@ const EditPostForm = () => {
         e.preventDefault();
         const success = await actions.editPost(id, formData); 
         if (success) {
-            navigate("/");
+            navigate("/profile");
         }
     };
 
