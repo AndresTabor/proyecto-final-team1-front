@@ -36,9 +36,10 @@ function App() {
         <Route path="/posts-list/:id" element={<PostSingleView />} />
         <Route path="/create-post" element={<CreatePostView />} />
         <Route path="/edit-post/:id" element={<EditPostForm />} />
-        <Route path='/favorites' element = {<Favorites/>} />
-        <Route path='/chats/:chatSelected?' element = {<Chats/>} />
-        
+        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/chats/:chatSelected?' element={<Chats />} />
+        <Route path='/public-profile/:idProfile' element = {<PublicProfile/>}/>
+
       </Routes>
       <Footer />
 
