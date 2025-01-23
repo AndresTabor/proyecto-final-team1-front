@@ -252,33 +252,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			// EDIT POST
-			editPost: async (id, updatedData) => {
+			editPost: async (id, postData) => {
 				try {
 					const response = await fetch(`${url_posts}/${id}`, {
 						method: "PUT",
 						headers: {
-							"Content-Type": "application/json",
+							"Content-Type": "application/json"
 						},
-						body: JSON.stringify(updatedData), 
+						body: JSON.stringify(postData)
 					});
 			
-					if (!response.ok) {
+					if (response.ok) {
+						const data = await response.json();
+						const store = getStore();
+			
+						// Actualizar el post en la store
+						const updatedPosts = store.posts.map(post =>
+							post.id === id ? { ...post, ...postData } : post
+						);
+			
+						setStore({ posts: updatedPosts, singlePost: data.data });
+						return { success: true, message: "Post actualizado exitosamente" };
+					} else {
 						const errorData = await response.json();
-						throw new Error(errorData.error || "Error al actualizar el post");
+						return { success: false, message: errorData.error || "Error al actualizar el post" };
 					}
-			
-					const data = await response.json();
-					setStore({
-						posts: getStore().posts.map((post) =>
-							post.id === id ? { ...post, ...updatedData } : post
-						),
-					});
-					return true;
 				} catch (error) {
-					console.error("Error al actualizar el post:", error);
-					return false; 
+					console.error("Error actualizando el post:", error);
+					return { success: false, message: "Error de red o servidor" };
 				}
-			},			
+			},
 			fetchPostById: async (id) => {
 				try {
 					const response = await fetch(`${url_posts}/${id}`);
@@ -286,15 +289,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error(`Error ${response.status}: ${response.statusText}`);
 					}
 					const data = await response.json();
-					if (data) {
-						setStore({ singlePost: data });
-						return data;
-					}
+					setStore({ singlePost: data });
+					return data;
 				} catch (error) {
-					console.error("Error al obtener el post:", error);
+					console.error("Error fetching single post:", error);
 					return null;
 				}
-			},
+			},			
+			
 			
 			
 			
