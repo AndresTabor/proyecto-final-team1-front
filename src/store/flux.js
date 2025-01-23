@@ -297,11 +297,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},			
 			
-			
-			
-			
-
-
 			uploadImageProfile: async (file) => {
 				const store = getStore();
 				const actions = getActions();
@@ -363,7 +358,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error(`Http error! status: ${resp.status}`);
 					}
 					const data = await resp.json();
-					const newFavorites = [...store.user.following, data.favorite];
+					const newFavorites = [...store.user.following, data];
 					setStore({ user: { ...store.user, following: newFavorites } });
 					localStorage.setItem('user', JSON.stringify(store.user));
 				} catch (error) {
