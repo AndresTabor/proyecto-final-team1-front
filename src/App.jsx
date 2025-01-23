@@ -14,6 +14,7 @@ import CreatePostView from './views/Posts/CreatePostView';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './App.css'
+import EditPostForm from './components/posts/EditPostForm';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/posts-list/:id" element={<PostSingleView />} />
         <Route path="/create-post" element={<CreatePostView />} />
+        <Route path="/edit-post/:id" element={<EditPostForm />} />
         <Route path='/favorites' element = {<Favorites/>} />
         <Route path='/chats/:chatSelected?' element = {<Chats/>} />
         
