@@ -1,20 +1,20 @@
-import React, { useEffect, useContext } from 'react';
-import { Context } from '../../store/AppContext';
-import PostCard from './PostCard';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useContext } from "react";
+import { Context } from "../../store/AppContext";
+import PostCard from "./PostCard";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const PostListByUserId = () => {
     const { store, actions } = useContext(Context);
 
-    let { pathname } = useLocation()
-    
-
     useEffect(() => {
-        actions.fetchPosts(); 
+        actions.fetchPosts();
     }, []);
 
-    // filtrar las publicaciones del usuario logueado
-    const userPosts = store.posts?.filter(post => post.user.id === store.user.id) || [];
+    const userPosts = store.posts?.filter((post) => post.user.id === store.user.id) || [];
+
+    const handleEditPost = (id) => {
+        navigate(`/edit-post/${id}`);
+    };
 
     return (
         <div className="container mt-5">
@@ -37,12 +37,28 @@ const PostListByUserId = () => {
             <div className="row">
                 {userPosts.length > 0 ? (
                     userPosts.map((post) => (
-                        <div className="col-12" key={post.id}>
-                            <PostCard post={post} /> 
+                        <div className="col-md-12 mb-4" key={post.id}>
+                            <div className="card shadow-sm border-0">
+                                <div className="card-body">
+                                    <PostCard post={post} />
+                                    <div className="d-flex justify-content-end mt-3">
+                                        <button
+                                            className="btn btn-outline-primary btn-sm"
+                                            onClick={() => handleEditPost(post.id)}
+                                        >
+                                            <i className="bi bi-pencil"></i> Editar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     ))
                 ) : (
-                    <p>No tienes publicaciones aún.</p>
+                    <div className="col-12">
+                        <div className="alert alert-info text-center">
+                            No tienes publicaciones aún. ¡Crea tu primera publicación ahora!
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
