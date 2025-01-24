@@ -42,11 +42,11 @@ const PostsList = () => {
     }, [store.filters.page, store.filters.limit]);
 
     return (
-        <div className="container mt-5">
-            <h1 className="mb-4">Publicaciones</h1>
+        <div className="container mt-4">
+            <h1 className="mb-4">Listado de Profesionales</h1>
 
             {/* añadimos la seccion de filtros */}
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSearch} className='mb-3'>
                 <div className='row'>
                     <div className='col-md-3'>
                         <input
