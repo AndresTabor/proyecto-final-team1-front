@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 	
-	const url = "https://musical-space-goldfish-x955x5wwjwqh6q7x-3000.app.github.dev";
+	const url = import.meta.env.VITE_URL;
 	const url_posts = `${url}/posts`
 	const cloudUrl = import.meta.env.VITE_CLOUD_URL;
 	
