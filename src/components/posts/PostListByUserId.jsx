@@ -52,12 +52,15 @@ const PostListByUserId = () => {
 
     return (
         <div className="container mt-5">
-            <div className="d-flex justify-content-between align-items-center mb-4">
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
                 <h1 className="mb-0">
                     {pathname.includes("public-profile") ? "Publicaciones" : "Mis Publicaciones"}
                 </h1>
                 {!pathname.includes("public-profile") && (
-                    <Link to="/create-post" className="btn btn-success">
+                    <Link
+                        to="/create-post"
+                        className="btn btn-success mt-3 mt-md-0 d-block d-md-inline-block"
+                    >
                         <i className="bi bi-plus-lg me-2"></i> Crear Nueva Publicación
                     </Link>
                 )}
@@ -66,16 +69,16 @@ const PostListByUserId = () => {
             <div className="row">
                 {userPosts.length > 0 ? (
                     userPosts.map((post) => (
-                        <div className="col-md-12 mb-4" key={post.id}>
+                        <div className="col-md-12 mb-4 mx-0 px-0" key={post.id}>
                             <div className="card shadow-sm border-0">
                                 <div className="card-body">
                                     <PostCard post={post} />
                                     {pathname.includes("public-profile") ? (
                                         ""
                                     ) : (
-                                        <div className="d-flex justify-content-end gap-2 mt-3">
+                                        <div className="d-flex flex-column flex-md-row justify-content-end gap-2 mt-3">
                                             <button
-                                                className="btn btn-primary btn-sm d-flex align-items-center gap-1 px-3"
+                                                className="btn btn-primary btn-sm d-flex align-items-center gap-1 px-3 mb-2 mb-md-0"
                                                 onClick={() => handleEditPost(post.id)}
                                             >
                                                 <i className="bi bi-pencil-fill"></i>
@@ -89,6 +92,7 @@ const PostListByUserId = () => {
                                                 <span>Eliminar</span>
                                             </button>
                                         </div>
+
                                     )}
                                 </div>
                             </div>
