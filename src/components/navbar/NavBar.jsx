@@ -15,8 +15,8 @@ export const NavBar = () => {
     const handleLogout = (e) => {
         e.preventDefault();
         actions.logout()
-        .then(() => navigate("/") )
-        .catch(e => console.error(e));
+            .then(() => navigate("/"))
+            .catch(e => console.error(e));
     }
 
     return (
@@ -50,9 +50,9 @@ export const NavBar = () => {
                     <div className="right-items">
 
                         {store.user && store.user.id ? "" : <li><NavLink to="/login" ><button>Iniciar Sesion</button></NavLink></li>}
-                        {store.user && store.user.id ? "" : <li><NavLink to= "/register"><button className="register-button">Registrarse</button></NavLink></li>}
-                        {store.user && store.user.id ? <li><NavLink to = "/chats" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaComments />Chats</NavLink></li> : ""}
-                        {store.user && store.user.id ? <li><NavLink to = "/profile" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaUserCircle />Perfil</NavLink></li> : ""}
+                        {store.user && store.user.id ? "" : <li><NavLink to="/register"><button className="register-button">Registrarse</button></NavLink></li>}
+                        {store.user && store.user.id ? <li><NavLink to="/chats" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaComments />Chats</NavLink></li> : ""}
+                        {store.user && store.user.id ? <li><NavLink to="/profile" className={({ isActive }) => (isActive ? "active-link-top" : "")}><FaUserCircle />Perfil</NavLink></li> : ""}
                         {store.user && store.user.id ? <li><NavLink onClick={handleLogout}><BiLogOut />Cerrar Sesion</NavLink></li> : ""}
 
                     </div>
@@ -67,16 +67,28 @@ export const NavBar = () => {
                             <FaHome />
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to="/favorites" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
                             <FaHeart />
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {store.user && store.user.id ?
+                        <NavLink to="/favorites" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
+                            <FaHeart />
+                        </NavLink>
+                        :
+                        ""}
+                    {/* <li>
                         <NavLink to="/chats" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
                             <FaComments />
                         </NavLink>
-                    </li>
+                    </li> */}
+                    {store.user && store.user.id ?
+                        <NavLink to="/favorites" className={({ isActive }) => (isActive ? "active-link-bottom" : "")}>
+                            <FaComments />
+                        </NavLink>
+                        :
+                        ""}
                     <li>
                         <NavLink
                             to={store.user && store.user.id ? "/profile" : "/login"}
