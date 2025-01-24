@@ -55,7 +55,7 @@ const CreatePostForm = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-2 mb-5">
             <ToastContainer />
             <h1 className="text-center mb-4">Crea tu Publicación</h1>
             <form

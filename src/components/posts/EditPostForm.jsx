@@ -66,7 +66,7 @@ const EditPostForm = () => {
     }
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-2 mb-5">
             <div className="row">
                 <div className="col-md-6">
                     <div className="card shadow-sm">
@@ -171,8 +171,7 @@ const EditPostForm = () => {
                 </div>
 
                 {/* vista previa del post */}
-                <div className="col-md-6">
-                    <h3>Vista previa</h3>
+                <div className="col-md-6 mb-5">
                     <SinglePost post={{ ...store.singlePost, ...formData }} />
                 </div>
             </div>
